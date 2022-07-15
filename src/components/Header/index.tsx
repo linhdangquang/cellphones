@@ -25,7 +25,7 @@ const Wrapper = styled.div`
   background-color: #d70018;
 `;
 
-const Container = styled.div`
+export const Container = styled.div`
   width: 1200px;
   margin: 0 auto;
   display: flex;

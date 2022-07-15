@@ -4,69 +4,59 @@ import {
   TabletFilled,
   AudioOutlined,
   SettingOutlined,
-  SearchOutlined,
 } from '@ant-design/icons';
-import { AutoComplete, Input, MenuProps } from 'antd';
+import {  MenuProps } from 'antd';
 import { Breadcrumb, Layout, Menu } from 'antd';
 import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import styled from 'styled-components';
+import HeaderAdmin from './Header';
 
-import LogoImage from '../../../assets/images/logo.png';
-import './admin.css';
 
-const { Header, Content, Sider } = Layout;
+const { Content, Sider } = Layout;
 
 const item3: MenuProps['items'] = [
   {
     key: 'cellphone',
-    icon: <PhoneOutlined />,
+    icon: <PhoneOutlined style={{ fontSize: '20px' }} />,
     label: <Link to='/admin/products'>Điện thoại</Link>,
   },
   {
     key: 'laptop',
-    icon: <LaptopOutlined />,
+    icon: <LaptopOutlined style={{ fontSize: '20px' }} />,
     label: <Link to='/admin'>Laptop</Link>,
   },
   {
     key: 'tablet',
-    icon: <TabletFilled />,
+    icon: <TabletFilled style={{ fontSize: '20px' }} />,
     label: <Link to='/admin'>Máy tính bảng</Link>,
   },
   {
     key: 'audio',
-    icon: <AudioOutlined />,
+    icon: <AudioOutlined style={{ fontSize: '20px' }} />,
     label: <Link to='/admin'>Âm thanh</Link>,
   },
   {
     key: 'categories',
-    icon: <SettingOutlined />,
+    icon: <SettingOutlined style={{ fontSize: '20px' }} />,
     label: <Link to='/admin/categories'>Categories</Link>,
   },
 ];
 
 const AdminLayout: React.FC = () => (
   <Layout>
-    <HeaderCustom>
-      <div className='logo-container'>
-        <Logo src={LogoImage} />
-        <h2>Dashboard</h2>
-      </div>
-      <SearchContainer>
-        <SearchInput prefix={<SearchOutlined />} />
-      </SearchContainer>
-      <div className='user-header'>
-        <h2>Xin chào Đặng Quang Linh</h2>
-      </div>
-      {/* <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']} items={items1} /> */}
-    </HeaderCustom>
+    <HeaderAdmin />
     <Layout>
-      <Sider width={200} className='site-layout-background'>
-        <Menu
+      <Sider width={400} className='site-layout-background'>
+        <MenuCustom
           mode='inline'
           defaultSelectedKeys={['cellphone']}
           defaultOpenKeys={['sub1']}
-          style={{ height: '100%', borderRight: 0 }}
+          style={{
+            height: '100%',
+            borderRight: 0,
+            padding: '20px 100px 0 50px',
+          }}
           items={item3}
         />
       </Sider>
@@ -79,46 +69,27 @@ const AdminLayout: React.FC = () => (
   </Layout>
 );
 
-const HeaderCustom = styled(Header)`
-  background-color: #00b0d7;
-  height: 64px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  .logo-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+const MenuCustom = styled(Menu)`
+  .ant-menu-item {
+    padding-left: 10px !important;
   }
 
-  .search-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .ant-menu-item::after {
+    display: none;
   }
 
-  h2 {
-    color: #fff;
-    font-size: 20px;
-    margin-bottom: 0;
-    margin-left: 16px;
+  .ant-menu:not(.ant-menu-horizontal),
+  .ant-menu-item-selected {
+    background-color: #00b0d7 !important;
+    color: #fff !important;
+    border-radius: 10px !important;
+  }
+
+  .ant-menu:not(.ant-menu-horizontal),
+  .ant-menu-item-selected .ant-menu-title-content a {
+    color: #fff !important;
   }
 `;
-
-const Logo = styled.img`
-  width: 64px;
-  height: auto;
-`;
-
-const SearchContainer = styled(AutoComplete)`
-  width: 50%;
-`;
-
-const SearchInput = styled(Input)`
-  width: 100%;
-  border-radius: 5px;
-`
 
 const ContentCustom = styled(Content)`
   min-height: 100vh;
