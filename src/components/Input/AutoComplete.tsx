@@ -17,7 +17,7 @@ const AutoComplete: React.FC = () => (
         options={options}
         style={{width: 500}}
     >
-        <WrapperInput size="large" placeholder="large size" prefix={<SearchOutlined />} />
+        <WrapperInput size="large" prefix={<SearchOutlined />} />
     </AutuCompleteAnt>
 );
 

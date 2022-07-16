@@ -1,15 +1,22 @@
-import React from "react";
-import {Outlet} from 'react-router-dom'
-import Header from "../../Header";
-
+import React from 'react';
+import { Outlet } from 'react-router-dom';
+import Header from '../../Header';
+import styled from 'styled-components';
 
 const UserLayout = () => {
-    return (
-        <>
-            <Header/>
-            <Outlet/>
-        </>
-    )
-}
+  return (
+    <>
+      <Header />
+      <Container>
+        <Outlet />
+      </Container>
+    </>
+  );
+};
 
-export default UserLayout
+const Container = styled.div`
+  width: 1200px;
+  margin: 0 auto;
+`;
+
+export default UserLayout;

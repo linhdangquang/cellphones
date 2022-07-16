@@ -47,7 +47,7 @@ const AdminLayout: React.FC = () => (
   <Layout>
     <HeaderAdmin />
     <Layout>
-      <Sider width={400} className='site-layout-background'>
+      <Sider width={350} className='site-layout-background'>
         <MenuCustom
           mode='inline'
           defaultSelectedKeys={['cellphone']}
@@ -55,7 +55,7 @@ const AdminLayout: React.FC = () => (
           style={{
             height: '100%',
             borderRight: 0,
-            padding: '20px 100px 0 50px',
+            padding: '20px 50px 0 50px',
           }}
           items={item3}
         />
@@ -93,6 +93,7 @@ const MenuCustom = styled(Menu)`
 
 const ContentCustom = styled(Content)`
   min-height: 100vh;
+  padding: 20px;
 `;
 
 export default AdminLayout;

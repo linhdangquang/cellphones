@@ -1,0 +1,10 @@
+.ant-table-container {
+  color: #5A6169;
+  text-align: center;
+}
+
+.ant-table-content, .ant-table-thead, .ant-table-cell {
+  background-color: #FBFBFB !important;
+  text-align: center !important;
+}
+
