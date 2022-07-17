@@ -3,3 +3,8 @@
 .cursor-pointer {
   cursor: pointer;
 }
+
+a {
+  color: #000 !important;
+  text-decoration: none;
+}
