@@ -15,19 +15,42 @@ import UploadImage from '../../../components/Product/UploadImage';
 import { useNavigate, useParams } from 'react-router-dom';
 import { PageTitle, TitleContainer } from '.';
 import { getProduct, updateProduct } from '../../../api/products';
+import { currencyFormatter, currencyParser } from '../../../utils/formatVND';
+import { uploadImage } from '../../../utils/uploadImageHandle';
 
 const { TextArea } = Input;
 const { Option } = Select;
 
 const Edit: React.FC = () => {
   const navigate = useNavigate();
+  const [product, setProduct] = useState<any>();
+  const [isRemoveImage, setIsRemoveImage] = useState<boolean>(false);
+  const [base64Image, setBase64Image] = useState<string>('');
+  const onRemoveImage = () => {
+    setIsRemoveImage(true);
+  };
+
+  const onUploadImage = (base64: string) => {
+    setBase64Image(base64);
+  };
   const [form] = Form.useForm();
   const { id } = useParams();
   const onFinish = async (values: any) => {
-    console.log('Success:', values);
 
     try {
-      await updateProduct({ ...values, id });
+      if (base64Image) {
+        const res = await uploadImage(base64Image);
+        if (res.code === 'ERR_BAD_REQUEST') {
+          message.error(res.response.statusText);
+          return;
+        }
+        values.image = res;
+        await updateProduct({ ...values, id });
+      } else if (isRemoveImage) {
+        await updateProduct({ ...values, id, image: '' });
+      } else {
+        await updateProduct({ ...values, ...product });
+      }
       message.success('Cập nhật thành công');
       navigate(-1);
     } catch (err) {
@@ -42,6 +65,7 @@ const Edit: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       const { data } = await getProduct(id);
+      setProduct(data);
       form.setFieldsValue(data);
     };
     fetchData();
@@ -53,7 +77,11 @@ const Edit: React.FC = () => {
       </TitleContainer>
       <Row gutter={16} style={{ backgroundColor: '#fff', padding: '10px' }}>
         <Col span={10}>
-          {/* <UploadImage  /> */}
+          <UploadImage
+            onUploadImage={onUploadImage}
+            productImage={product?.image}
+            onRemoveImage={onRemoveImage}
+          />
         </Col>
         <Col span={14}>
           <Typography.Title level={5}>Thông tin sản phẩm</Typography.Title>
@@ -88,10 +116,12 @@ const Edit: React.FC = () => {
                 >
                   <InputNumber
                     style={{ width: '100%' }}
-                    formatter={(value) =>
-                      `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-                    }
-                    parser={(value) => value!.replace(/\$\s?|(,*)/g, '')}
+                    // formatter={(value) =>
+                    //   `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+                    // }
+                    // parser={(value) => value!.replace(/\$\s?|(,*)/g, '')}
+                    formatter={currencyFormatter}
+                    parser={currencyParser}
                     size='large'
                   />
                 </Form.Item>
@@ -117,10 +147,8 @@ const Edit: React.FC = () => {
                 >
                   <InputNumber
                     style={{ width: '100%' }}
-                    formatter={(value) =>
-                      `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-                    }
-                    parser={(value) => value!.replace(/\$\s?|(,*)/g, '')}
+                    formatter={currencyFormatter}
+                    parser={currencyParser}
                     size='large'
                   />
                 </Form.Item>

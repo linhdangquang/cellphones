@@ -35,8 +35,8 @@ const ProductAdminPage = () => {
     },
     {
       title: 'Mô tả',
-      key: 'description',
-      dataIndex: 'description',
+      key: 'feature',
+      dataIndex: 'feature',
     },
     {
       title: 'Ẩn/hiện',

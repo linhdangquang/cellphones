@@ -2,9 +2,9 @@
   "users": [],
   "products": [
     {
-      "name": "Apple iPhone 13 Pro Max",
+      "name": "Apple iPhone 13 Pro Max China",
       "originalPrice": 122222,
-      "saleOffPrice": 1231,
+      "saleOffPrice": 9999,
       "categories": "phone",
       "feature": "Apple iPhone 13 Pro Max",
       "description": "Apple iPhone 13 Pro Max",
@@ -13,7 +13,8 @@
     {
       "name": "Apple iPhone 13 Pro Max",
       "originalPrice": 33990000,
-      "saleOffPrice": 27390000,
+      "saleOffPrice": 1999999,
+      "categories": "phone",
       "feature": "Màn hình Super Retina XDR 6.7 inch với ProMotion cho cảm giác nhanh nhạy hơn3\nChế độ Điện Ảnh làm tăng thêm độ sâu trường ảnh nông và tự động thay đổi tiêu cự trong video\nHệ thống camera chuyên nghiệp Telephoto, Wide và Ultra Wide 12MP; LiDAR Scanner; phạm vi thu phóng quang học 6x; chụp ảnh macro; Phong Cách Nhiếp Ảnh, video ProRes, HDR thông minh thế hệ 4, chế độ Ban Đêm, Apple ProRAW, khả năng quay video HDR Dolby Vision 4K",
       "description": "Cần có gói cước dữ liệu. Mạng 5G chỉ khả dụng ở một số thị trường và được cung cấp qua một số nhà mạng. Tốc độ có thể thay đổi tùy địa điểm và nhà mạng. Để biết thông tin về hỗ trợ mạng 5G, vui lòng liên hệ nhà mạng và truy cập apple.com/iphone/cellular.\n\n2Thời lượng pin khác nhau tùy theo cách sử dụng và cấu hình. Truy cập apple.com/batteries để biết thêm thông tin.\n\n",
       "id": 2
@@ -52,23 +53,61 @@
       "id": 6
     },
     {
-      "name": "test",
-      "originalPrice": 99999,
-      "saleOffPrice": 88,
+      "name": "Test ",
+      "originalPrice": 123293,
+      "saleOffPrice": 4343,
       "categories": "phone",
-      "feature": "sadads",
-      "description": "9\n",
+      "feature": "asddas",
+      "description": "ojoijio",
       "id": 7
     },
     {
-      "name": "dasadsads",
-      "originalPrice": 888888,
-      "saleOffPrice": 88,
-      "categories": "phone",
-      "feature": "dadsdaj",
-      "description": "888",
-      "image": "http://res.cloudinary.com/dv3vzmogk/image/upload/v1658203810/anhhtus/ihesnli0efquzxlji82i.png",
+      "name": "asdas",
+      "originalPrice": 99889,
+      "saleOffPrice": 777,
+      "categories": "laptop",
+      "feature": "asdasas",
+      "description": "89889",
       "id": 8
+    },
+    {
+      "name": "tetsja",
+      "originalPrice": 99999,
+      "saleOffPrice": 989,
+      "categories": "phone",
+      "feature": "j98j98jads9j",
+      "description": "asdjas9j",
+      "image": "http://res.cloudinary.com/dv3vzmogk/image/upload/v1658252535/anhhtus/rqhrflnj5fg8xy7osgi1.png",
+      "id": 9
+    },
+    {
+      "name": "THêm ới",
+      "originalPrice": 12323,
+      "saleOffPrice": 22,
+      "categories": "phone",
+      "feature": "ádsaddsa",
+      "description": "98asd8a8s9",
+      "image": "http://res.cloudinary.com/dv3vzmogk/image/upload/v1658252978/anhhtus/tqfcqntwt1rbbch6wirs.png",
+      "id": 10
+    },
+    {
+      "name": "soidjs",
+      "originalPrice": 9099,
+      "saleOffPrice": 9099,
+      "categories": "phone",
+      "feature": "89898",
+      "description": "989889",
+      "id": 11
+    },
+    {
+      "name": "áoadskosk",
+      "originalPrice": 9987,
+      "saleOffPrice": 876,
+      "categories": "phone",
+      "feature": "dá8adsg8",
+      "description": "87788787",
+      "id": 12,
+      "image": ""
     }
   ]
 }

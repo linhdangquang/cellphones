@@ -15,7 +15,8 @@ import UploadImage from '../../../components/Product/UploadImage';
 import { createProduct } from '../../../api/products';
 import { useNavigate } from 'react-router-dom';
 import { PageTitle, TitleContainer } from '.';
-import { upload } from '../../../api/images';
+import { uploadImage } from '../../../utils/uploadImageHandle';
+import { currencyFormatter, currencyParser } from '../../../utils/formatVND';
 
 const { TextArea } = Input;
 const { Option } = Select;
@@ -26,21 +27,15 @@ const Add: React.FC = () => {
   const onUploadImage = (base64: string) => {
     setBase64Image(base64);
   };
-  const uploadImage = async (base64Image: string) => {
-    try {
-      const { data } = await upload(base64Image);
-      return data.url;
-    } catch (err: any) {
-      console.log(err);
-      message.error(JSON.stringify(err.message));
-    }
-  };
   const onFinish = async (values: any) => {
-    console.log('Success:', values);
-
     try {
       if (base64Image) {
-        values.image = await uploadImage(base64Image);
+        const res = await uploadImage(base64Image);
+        if (res.code === 'ERR_BAD_REQUEST') {
+          message.error(res.response.statusText);
+          return;
+        }
+        values.image = res;
       }
       await createProduct(values);
       message.success('Tạo mới thành công');
@@ -93,7 +88,14 @@ const Add: React.FC = () => {
                     { required: true, message: 'Giá gốc không được trống' },
                   ]}
                 >
-                  <InputNumber min={0} style={{ width: '100%' }} size='large' />
+                  <InputNumber
+                    defaultValue={''}
+                    min={1}
+                    formatter={currencyFormatter}
+                    parser={currencyParser}
+                    style={{ width: '100%' }}
+                    size='large'
+                  />
                 </Form.Item>
               </Col>
               <Col span={12}>
@@ -105,7 +107,7 @@ const Add: React.FC = () => {
                     { required: true, message: 'Gía khuyến mãi ' },
                     ({ getFieldValue }) => ({
                       validator(_, value) {
-                        if (!value || value > getFieldValue('originalPrice')) {
+                        if (value > getFieldValue('originalPrice')) {
                           return Promise.reject(
                             'Giá khuyến mãi phải bé hơn giá gốc'
                           );
@@ -115,14 +117,22 @@ const Add: React.FC = () => {
                     }),
                   ]}
                 >
-                  <InputNumber style={{ width: '100%' }} size='large' />
+                  <InputNumber
+                    defaultValue={''}
+                    formatter={currencyFormatter}
+                    parser={currencyParser}
+                    style={{ width: '100%' }}
+                    size='large'
+                  />
                 </Form.Item>
               </Col>
               <Col span={12}>
                 <Form.Item
                   label='Phân loại'
                   name='categories'
-                  rules={[{ required: true }]}
+                  rules={[
+                    { required: true, message: 'Phân loại không được trống' },
+                  ]}
                 >
                   <Select style={{ width: '100%' }} size='large'>
                     <Option value='phone'>Điện thoại</Option>
