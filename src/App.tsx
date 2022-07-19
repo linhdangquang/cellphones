@@ -6,6 +6,7 @@ import ProductAdminPage from './pages/Admin/products';
 import UserLayout from './components/Layout/User/User';
 import Home from './pages/Home';
 import Add from './pages/Admin/products/Add';
+import Edit from './pages/Admin/products/Edit';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route index element={<ProductAdminPage/>} />
             <Route path='products' element={<ProductAdminPage/>} />
             <Route path='products/add' element={<Add/>} />
+            <Route path='products/edit/:id' element={<Edit/>} />
           </Route>
       </Routes>
     </div>

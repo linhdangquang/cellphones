@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import {
   Typography,
@@ -12,38 +12,23 @@ import {
   message,
 } from 'antd';
 import UploadImage from '../../../components/Product/UploadImage';
-import { createProduct } from '../../../api/products';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { PageTitle, TitleContainer } from '.';
-import { upload } from '../../../api/images';
+import { getProduct, updateProduct } from '../../../api/products';
 
 const { TextArea } = Input;
 const { Option } = Select;
 
-const Add: React.FC = () => {
+const Edit: React.FC = () => {
   const navigate = useNavigate();
-  const [base64Image, setBase64Image] = useState<string>('');
-  const onUploadImage = (base64: string) => {
-    setBase64Image(base64);
-  };
-  const uploadImage = async (base64Image: string) => {
-    try {
-      const { data } = await upload(base64Image);
-      return data.url;
-    } catch (err: any) {
-      console.log(err);
-      message.error(JSON.stringify(err.message));
-    }
-  };
+  const [form] = Form.useForm();
+  const { id } = useParams();
   const onFinish = async (values: any) => {
     console.log('Success:', values);
 
     try {
-      if (base64Image) {
-        values.image = await uploadImage(base64Image);
-      }
-      await createProduct(values);
-      message.success('Tạo mới thành công');
+      await updateProduct({ ...values, id });
+      message.success('Cập nhật thành công');
       navigate(-1);
     } catch (err) {
       message.error('Có lỗi xảy ra');
@@ -53,20 +38,28 @@ const Add: React.FC = () => {
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data } = await getProduct(id);
+      form.setFieldsValue(data);
+    };
+    fetchData();
+  }, [id, form]);
   return (
     <>
       <TitleContainer>
-        <PageTitle>Thêm mới điện thoại</PageTitle>
+        <PageTitle>Cập nhật điện thoại</PageTitle>
       </TitleContainer>
       <Row gutter={16} style={{ backgroundColor: '#fff', padding: '10px' }}>
         <Col span={10}>
-          <UploadImage onUploadImage={onUploadImage} />
+          {/* <UploadImage  /> */}
         </Col>
         <Col span={14}>
           <Typography.Title level={5}>Thông tin sản phẩm</Typography.Title>
           <Form
-            // name="product"
-            initialValues={{}}
+            name='product'
+            form={form}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             autoComplete='on'
@@ -93,7 +86,14 @@ const Add: React.FC = () => {
                     { required: true, message: 'Giá gốc không được trống' },
                   ]}
                 >
-                  <InputNumber min={0} style={{ width: '100%' }} size='large' />
+                  <InputNumber
+                    style={{ width: '100%' }}
+                    formatter={(value) =>
+                      `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                    }
+                    parser={(value) => value!.replace(/\$\s?|(,*)/g, '')}
+                    size='large'
+                  />
                 </Form.Item>
               </Col>
               <Col span={12}>
@@ -115,14 +115,21 @@ const Add: React.FC = () => {
                     }),
                   ]}
                 >
-                  <InputNumber style={{ width: '100%' }} size='large' />
+                  <InputNumber
+                    style={{ width: '100%' }}
+                    formatter={(value) =>
+                      `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                    }
+                    parser={(value) => value!.replace(/\$\s?|(,*)/g, '')}
+                    size='large'
+                  />
                 </Form.Item>
               </Col>
               <Col span={12}>
                 <Form.Item
                   label='Phân loại'
                   name='categories'
-                  rules={[{ required: true }]}
+                  rules={[{ required: true, message: 'Phân loại' }]}
                 >
                   <Select style={{ width: '100%' }} size='large'>
                     <Option value='phone'>Điện thoại</Option>
@@ -160,7 +167,7 @@ const Add: React.FC = () => {
                 size='large'
                 htmlType='submit'
               >
-                Tạo mới sản phẩm
+                Cập nhật sản phẩm
               </AddButton>
             </Form.Item>
           </Form>
@@ -174,4 +181,4 @@ export const AddButton = styled(Button)`
   background-color: #00b0d7;
 `;
 
-export default Add;
+export default Edit;

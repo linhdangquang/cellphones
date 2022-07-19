@@ -4,7 +4,8 @@
     {
       "name": "Apple iPhone 13 Pro Max",
       "originalPrice": 122222,
-      "saleOffPrice": 12312321312,
+      "saleOffPrice": 1231,
+      "categories": "phone",
       "feature": "Apple iPhone 13 Pro Max",
       "description": "Apple iPhone 13 Pro Max",
       "id": 1
@@ -42,13 +43,32 @@
       "id": 5
     },
     {
-      "name": "Test thoi",
-      "originalPrice": 8989898,
-      "saleOffPrice": 45454,
+      "name": "Test update 2",
+      "originalPrice": 888888,
+      "saleOffPrice": 88888,
       "categories": "phone",
       "feature": "sadiodsaj",
       "description": "dsa89sa98sd",
       "id": 6
+    },
+    {
+      "name": "test",
+      "originalPrice": 99999,
+      "saleOffPrice": 88,
+      "categories": "phone",
+      "feature": "sadads",
+      "description": "9\n",
+      "id": 7
+    },
+    {
+      "name": "dasadsads",
+      "originalPrice": 888888,
+      "saleOffPrice": 88,
+      "categories": "phone",
+      "feature": "dadsdaj",
+      "description": "888",
+      "image": "http://res.cloudinary.com/dv3vzmogk/image/upload/v1658203810/anhhtus/ihesnli0efquzxlji82i.png",
+      "id": 8
     }
   ]
 }

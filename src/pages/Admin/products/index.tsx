@@ -10,10 +10,9 @@ import './products.css';
 import { Link } from 'react-router-dom';
 import { PlusSquareOutlined } from '@ant-design/icons';
 
-
 const ProductAdminPage = () => {
   const [products, setProducts] = useState<any[]>([]);
-
+  const [loading, setLoading] = useState(false);
   const dataSource = products?.map((item, idx) => {
     return { ...item, key: idx + 1 };
   });
@@ -55,7 +54,9 @@ const ProductAdminPage = () => {
       dataIndex: 'id',
       render: (text: any, record: any): any => (
         <div className='cursor-pointer'>
-          <EditIcon width='50px' />
+          <Link to={`edit/${text}`}>
+            <EditIcon width='50px' />
+          </Link>
         </div>
       ),
     },
@@ -63,7 +64,9 @@ const ProductAdminPage = () => {
 
   useEffect(() => {
     const getProducts = async () => {
+      setLoading(true);
       const { data } = await getAllPros();
+      setLoading(false);
       setProducts(data);
     };
     getProducts();
@@ -76,7 +79,12 @@ const ProductAdminPage = () => {
           <PlusSquareOutlined style={{ color: '#00B0D7', fontSize: '36px' }} />
         </Link>
       </TitleContainer>
-      <Table dataSource={dataSource} tableLayout='fixed' columns={columns} />
+      <Table
+        loading={loading}
+        dataSource={dataSource}
+        tableLayout='fixed'
+        columns={columns}
+      />
     </>
   );
 };
@@ -88,10 +96,10 @@ export const PageTitle = styled.div`
 `;
 
 export const TitleContainer = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 15px ;
-`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+`;
 
 export default ProductAdminPage;
