@@ -4,22 +4,27 @@ import {
   TabletFilled,
   AudioOutlined,
   SettingOutlined,
+  HddOutlined,
 } from '@ant-design/icons';
-import {  MenuProps } from 'antd';
+import { MenuProps } from 'antd';
 import { Breadcrumb, Layout, Menu } from 'antd';
 import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 import HeaderAdmin from './Header';
 
-
 const { Content, Sider } = Layout;
 
 const item3: MenuProps['items'] = [
   {
+    key: 'listProduct',
+    icon: <HddOutlined style={{ fontSize: '20px' }} />,
+    label: <Link to='/admin/products'>Sản phẩm</Link>,
+  },
+  {
     key: 'cellphone',
     icon: <PhoneOutlined style={{ fontSize: '20px' }} />,
-    label: <Link to='/admin/products'>Điện thoại</Link>,
+    label: <Link to='/admin'>Điện thoại</Link>,
   },
   {
     key: 'laptop',
@@ -50,7 +55,7 @@ const AdminLayout: React.FC = () => (
       <Sider width={350} className='site-layout-background'>
         <MenuCustom
           mode='inline'
-          defaultSelectedKeys={['cellphone']}
+          defaultSelectedKeys={['listProduct']}
           defaultOpenKeys={['sub1']}
           style={{
             height: '100%',

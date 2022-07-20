@@ -23,12 +23,14 @@ const { Option } = Select;
 
 const Add: React.FC = () => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState<boolean>(false);
   const [base64Image, setBase64Image] = useState<string>('');
   const onUploadImage = (base64: string) => {
     setBase64Image(base64);
   };
   const onFinish = async (values: any) => {
     try {
+      setLoading(true);
       if (base64Image) {
         const res = await uploadImage(base64Image);
         if (res.code === 'ERR_BAD_REQUEST') {
@@ -42,6 +44,8 @@ const Add: React.FC = () => {
       navigate(-1);
     } catch (err) {
       message.error('Có lỗi xảy ra');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -61,7 +65,10 @@ const Add: React.FC = () => {
           <Typography.Title level={5}>Thông tin sản phẩm</Typography.Title>
           <Form
             // name="product"
-            initialValues={{}}
+            initialValues={{
+              originalPrice: '',
+              saleOffPrice: '',
+            }}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             autoComplete='on'
@@ -89,7 +96,6 @@ const Add: React.FC = () => {
                   ]}
                 >
                   <InputNumber
-                    defaultValue={''}
                     min={1}
                     formatter={currencyFormatter}
                     parser={currencyParser}
@@ -118,7 +124,6 @@ const Add: React.FC = () => {
                   ]}
                 >
                   <InputNumber
-                    defaultValue={''}
                     formatter={currencyFormatter}
                     parser={currencyParser}
                     style={{ width: '100%' }}
@@ -169,6 +174,7 @@ const Add: React.FC = () => {
                 shape='round'
                 size='large'
                 htmlType='submit'
+                loading={loading}
               >
                 Tạo mới sản phẩm
               </AddButton>

@@ -23,6 +23,7 @@ const { Option } = Select;
 
 const Edit: React.FC = () => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState<boolean>(false);
   const [product, setProduct] = useState<any>();
   const [isRemoveImage, setIsRemoveImage] = useState<boolean>(false);
   const [base64Image, setBase64Image] = useState<string>('');
@@ -36,8 +37,8 @@ const Edit: React.FC = () => {
   const [form] = Form.useForm();
   const { id } = useParams();
   const onFinish = async (values: any) => {
-
     try {
+      setLoading(true);
       if (base64Image) {
         const res = await uploadImage(base64Image);
         if (res.code === 'ERR_BAD_REQUEST') {
@@ -55,6 +56,8 @@ const Edit: React.FC = () => {
       navigate(-1);
     } catch (err) {
       message.error('Có lỗi xảy ra');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -194,6 +197,7 @@ const Edit: React.FC = () => {
                 shape='round'
                 size='large'
                 htmlType='submit'
+                loading={loading}
               >
                 Cập nhật sản phẩm
               </AddButton>

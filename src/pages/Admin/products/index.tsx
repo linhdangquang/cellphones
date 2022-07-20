@@ -31,18 +31,46 @@ const ProductAdminPage = () => {
       title: 'Thành tiền',
       key: 'originalPrice',
       dataIndex: 'originalPrice',
-      render: (text: any, record: any): any => <p>{formatVND(text)}</p>,
+      sorter: (a: any, b: any) => a.originalPrice - b.originalPrice,
+      render: (text: any): any => <p>{formatVND(text)}</p>,
     },
     {
-      title: 'Mô tả',
-      key: 'feature',
-      dataIndex: 'feature',
+      title: 'Ảnh',
+      key: 'image',
+      dataIndex: 'image',
+      render: (text: any): any => (
+        <img src={text} alt="product" width="100" />
+      )
+    },
+    {
+      title: 'Loại',
+      key: 'categories',
+      dataIndex: 'categories',
+      filters: [
+        { text: 'Điện thoại', value: 'phone' },
+        { text: 'Laptop', value: 'laptop' },
+        { text: 'Máy tính bảng', value: 'tablet' },
+        { text: 'Phụ kiện', value: 'accessories' },
+
+      ],
+      onFilter: (value:any, record) => record?.categories?.indexOf(value) === 0,
+      render: (text: any, record): any => {
+        if (text === 'phone') {
+          return <p>Điện thoại</p>;
+        } else if (text === 'laptop') {
+          return <p>Laptop</p>;
+        } else if (text === 'tablet') {
+          return <p>Máy tính bảng</p>;
+        } else if (text === 'accessories') {
+          return <p>Phụ kiện</p>;
+        }
+      }
     },
     {
       title: 'Ẩn/hiện',
       key: 'id',
       dataIndex: 'id',
-      render: (text: any, record: any): any => (
+      render: (text: any): any => (
         <div className='cursor-pointer'>
           <ToogleIcon width='50px' />
         </div>
@@ -52,7 +80,7 @@ const ProductAdminPage = () => {
       title: 'Thao tác',
       key: 'id',
       dataIndex: 'id',
-      render: (text: any, record: any): any => (
+      render: (text: any): any => (
         <div className='cursor-pointer'>
           <Link to={`edit/${text}`}>
             <EditIcon width='50px' />
