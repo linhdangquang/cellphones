@@ -1,22 +1,32 @@
+import { Carousel } from 'antd';
 import React from 'react';
 import styled from 'styled-components';
 import MainHomeMenu from './MainHomeMenu';
+import Banner1 from '../../assets/images/banner1.png';
+import Banner2 from '../../assets/images/banner2.png';
+import Banner3 from '../../assets/images/banner3.png';
+import Banner4 from '../../assets/images/banner4.png';
+import Banner5 from '../../assets/images/banner5.png';
+import Banner6 from '../../assets/images/banner6.png';
 type Props = {};
 
 const Home = (props: Props) => {
+  const slides = [Banner1, Banner2, Banner3, Banner4, Banner5, Banner6];
   return (
     <>
       <HomeTopContent>
         <MainHomeMenu />
-        <HomeTopBanner>
-          <img src="https://cdn2.cellphones.com.vn/690x300/https://dashboard.cellphones.com.vn/storage/s22%20new.png" alt=""/>
-        </HomeTopBanner>
+        <SliderContainer autoplay effect='fade' dots dotPosition='bottom'>
+          {slides.map((slide, index) => (
+            <Slide key={index}>
+              <img src={slide} alt='slide' />
+            </Slide>
+          ))}
+        </SliderContainer>
       </HomeTopContent>
     </>
   );
 };
-
-
 
 const HomeTopContent = styled.div`
   margin: 15px 0;
@@ -24,7 +34,13 @@ const HomeTopContent = styled.div`
   column-gap: 50px;
 `;
 
-const HomeTopBanner = styled.div`
+const SliderContainer = styled(Carousel)`
+  width: calc(1200px - 300px);
+  max-width: 1200px;; 
+  margin: 0 auto;
+`;
+
+const Slide = styled.div`
   width: 100%;
   height: 450px;
   flex: 1;
@@ -32,6 +48,6 @@ const HomeTopBanner = styled.div`
     width: 100%;
     height: 100%;
   }
-`
+`;
 
 export default Home;

@@ -1,4 +1,4 @@
-import { Table } from 'antd';
+import { Button, Select, Table } from 'antd';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import type { ColumnsType } from 'antd/es/table';
@@ -9,13 +9,22 @@ import { ReactComponent as EditIcon } from '../../../assets/images/Edit.svg';
 import './products.css';
 import { Link } from 'react-router-dom';
 import { PlusSquareOutlined } from '@ant-design/icons';
+import { FormSelect } from '../../../components/Product/ProductForm';
 
+const { Option } = Select;
 const ProductAdminPage = () => {
   const [products, setProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
+  const [filterInfo, setFilterInfo] = useState<any>([]);
   const dataSource = products?.map((item, idx) => {
     return { ...item, key: idx + 1 };
   });
+  const setFilterValue = (value: any) => {
+    setFilterInfo([value]);
+  };
+  const clearFilter = () => {
+    setFilterInfo([]);
+  };
   const columns: ColumnsType<any> = [
     {
       title: '#',
@@ -32,39 +41,41 @@ const ProductAdminPage = () => {
       key: 'originalPrice',
       dataIndex: 'originalPrice',
       sorter: (a: any, b: any) => a.originalPrice - b.originalPrice,
-      render: (text: any): any => <p>{formatVND(text)}</p>,
+      render: (text: any): any => <>{formatVND(text)}</>,
     },
     {
       title: 'Ảnh',
       key: 'image',
       dataIndex: 'image',
-      render: (text: any): any => (
-        <img src={text} alt="product" width="100" />
-      )
+      render: (text: any): any => <img src={text} alt='product' width='100' />,
     },
     {
       title: 'Loại',
       key: 'categories',
       dataIndex: 'categories',
-      filters: [
-        { text: 'Điện thoại', value: 'phone' },
-        { text: 'Laptop', value: 'laptop' },
-        { text: 'Máy tính bảng', value: 'tablet' },
-        { text: 'Phụ kiện', value: 'accessories' },
-
-      ],
-      onFilter: (value:any, record) => record?.categories?.indexOf(value) === 0,
-      render: (text: any, record): any => {
+      // filters: [
+      //   { text: 'Điện thoại', value: 'phone' },
+      //   { text: 'Laptop', value: 'laptop' },
+      //   { text: 'Máy tính bảng', value: 'tablet' },
+      //   { text: 'Phụ kiện', value: 'accessories' },
+      // ],
+      filterIcon(filtered) {
+        return null;
+      },
+      filteredValue: filterInfo || null,
+      onFilter: (value: any, record) =>
+        record?.categories?.indexOf(value) === 0,
+      render: (text: any): any => {
         if (text === 'phone') {
-          return <p>Điện thoại</p>;
+          return <>Điện thoại</>;
         } else if (text === 'laptop') {
-          return <p>Laptop</p>;
+          return <>Laptop</>;
         } else if (text === 'tablet') {
-          return <p>Máy tính bảng</p>;
+          return <>Máy tính bảng</>;
         } else if (text === 'accessories') {
-          return <p>Phụ kiện</p>;
+          return <>Phụ kiện</>;
         }
-      }
+      },
     },
     {
       title: 'Ẩn/hiện',
@@ -107,11 +118,33 @@ const ProductAdminPage = () => {
           <PlusSquareOutlined style={{ color: '#00B0D7', fontSize: '36px' }} />
         </Link>
       </TitleContainer>
+      <FilterContainer>
+        <div>Bộ lọc:</div>
+        <SelectContainer>
+          <div>
+            <span>Danh mục sản phẩm</span>
+            <FormSelect
+              onSelect={setFilterValue}
+              value={filterInfo}
+              placeholder='Chọn loại'
+              style={{ width: 300 }}
+            >
+              <Option value='phone'>Điện thoại</Option>
+              <Option value='laptop'>Laptop</Option>
+              <Option value='accessories'>Phụ kiện</Option>
+              <Option value='tablet'>Máy tính bảng</Option>
+            </FormSelect>
+          </div>
+          <Button onClick={clearFilter}>Xóa</Button>
+        </SelectContainer>
+      </FilterContainer>
       <Table
         loading={loading}
         dataSource={dataSource}
         tableLayout='fixed'
         columns={columns}
+        size='small'
+        pagination={{ showSizeChanger: true }}
       />
     </>
   );
@@ -128,6 +161,27 @@ export const TitleContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-bottom: 15px;
+`;
+
+export const FilterContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+`;
+
+const SelectContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  div {
+    display: grid;
+    margin-right: 5px;
+    span {
+      font-size: 13px;
+      color: #5a6169;
+    }
+  }
 `;
 
 export default ProductAdminPage;

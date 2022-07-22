@@ -2,12 +2,13 @@
   "users": [],
   "products": [
     {
-      "name": "Apple iPhone 13 Pro Max China",
-      "originalPrice": 122222,
-      "saleOffPrice": 9999,
+      "name": "Apple ",
+      "originalPrice": 12222200,
+      "saleOffPrice": 9999000,
       "categories": "phone",
       "feature": "Apple iPhone 13 Pro Max",
       "description": "Apple iPhone 13 Pro Max",
+      "image": "http://res.cloudinary.com/linh-asm/image/upload/v1658501907/cellphones/qofvpmyfw7yiu4bnguq5.webp",
       "id": 1
     },
     {
@@ -17,19 +18,21 @@
       "categories": "phone",
       "feature": "Màn hình Super Retina XDR 6.7 inch với ProMotion cho cảm giác nhanh nhạy hơn3\nChế độ Điện Ảnh làm tăng thêm độ sâu trường ảnh nông và tự động thay đổi tiêu cự trong video\nHệ thống camera chuyên nghiệp Telephoto, Wide và Ultra Wide 12MP; LiDAR Scanner; phạm vi thu phóng quang học 6x; chụp ảnh macro; Phong Cách Nhiếp Ảnh, video ProRes, HDR thông minh thế hệ 4, chế độ Ban Đêm, Apple ProRAW, khả năng quay video HDR Dolby Vision 4K",
       "description": "Cần có gói cước dữ liệu. Mạng 5G chỉ khả dụng ở một số thị trường và được cung cấp qua một số nhà mạng. Tốc độ có thể thay đổi tùy địa điểm và nhà mạng. Để biết thông tin về hỗ trợ mạng 5G, vui lòng liên hệ nhà mạng và truy cập apple.com/iphone/cellular.\n\n2Thời lượng pin khác nhau tùy theo cách sử dụng và cấu hình. Truy cập apple.com/batteries để biết thêm thông tin.\n\n",
+      "image": "http://res.cloudinary.com/linh-asm/image/upload/v1658501920/cellphones/c3r5w3ysgkupofqceor8.webp",
       "id": 2
     },
     {
-      "name": "Apple iPhone 13 Pro Max",
+      "name": "Macbook Pro 13",
       "originalPrice": 33990000,
       "saleOffPrice": 27390000,
-      "categories": "tablet",
+      "categories": "laptop",
       "feature": "Màn hình Super Retina XDR 6.7 inch với ProMotion cho cảm giác nhanh nhạy hơn3\nChế độ Điện Ảnh làm tăng thêm độ sâu trường ảnh nông và tự động thay đổi tiêu cự trong video\nHệ thống camera chuyên nghiệp Telephoto, Wide và Ultra Wide 12MP; LiDAR Scanner; phạm vi thu phóng quang học 6x; chụp ảnh macro; Phong Cách Nhiếp Ảnh, video ProRes, HDR thông minh thế hệ 4, chế độ Ban Đêm, Apple ProRAW, khả năng quay video HDR Dolby Vision 4K",
       "description": "Cần có gói cước dữ liệu. Mạng 5G chỉ khả dụng ở một số thị trường và được cung cấp qua một số nhà mạng. Tốc độ có thể thay đổi tùy địa điểm và nhà mạng. Để biết thông tin về hỗ trợ mạng 5G, vui lòng liên hệ nhà mạng và truy cập apple.com/iphone/cellular.\n\n2Thời lượng pin khác nhau tùy theo cách sử dụng và cấu hình. Truy cập apple.com/batteries để biết thêm thông tin.\n\n",
+      "image": "http://res.cloudinary.com/linh-asm/image/upload/v1658505499/cellphones/tfi41f2kmye7u6zmtai6.jpg",
       "id": 3
     },
     {
-      "name": "Apple iPad Air (4th Gen) Wi-Fi, 2020",
+      "name": "Mạc Bục Pro Max",
       "originalPrice": 15990000,
       "saleOffPrice": 14870000,
       "categories": "laptop",
@@ -44,14 +47,14 @@
       "categories": "phone",
       "feature": "Apple Watch Series 3 GPS Sport Band (Viền Nhôm, Dây Cao Su)",
       "description": "Apple Watch Series 3 GPS Sport Band (Viền Nhôm, Dây Cao Su)",
-      "image": "http://res.cloudinary.com/dv3vzmogk/image/upload/v1658253185/anhhtus/xxrjduumlqr398lbycia.png",
+      "image": "http://res.cloudinary.com/linh-asm/image/upload/v1658501874/cellphones/nirt9hz7acx1kc2foos1.png",
       "id": 5
     },
     {
       "name": "asdasdiodahsio",
       "originalPrice": 989889,
       "saleOffPrice": 8888,
-      "categories": "phone",
+      "categories": "tablet",
       "feature": "988998",
       "description": "98dha9dh8",
       "image": "http://res.cloudinary.com/dv3vzmogk/image/upload/v1658331782/anhhtus/e9j68eiol26fdukq6uyi.png",
@@ -66,6 +69,26 @@
       "description": "9898",
       "image": "http://res.cloudinary.com/linh-asm/image/upload/v1658336843/cellphones/mkjrcez9d4efiywb2bkt.png",
       "id": 7
+    },
+    {
+      "name": "Iphone 13 PRO MAX",
+      "originalPrice": 39393939,
+      "saleOffPrice": 30000000,
+      "categories": "phone",
+      "feature": "Đẹp",
+      "description": "Đẹp",
+      "image": "http://res.cloudinary.com/linh-asm/image/upload/v1658337084/cellphones/hgawtkq4wvfxtie9weo0.webp",
+      "id": 8
+    },
+    {
+      "name": "Nokia X1",
+      "originalPrice": 99999999,
+      "saleOffPrice": 12312312,
+      "categories": "phone",
+      "feature": "áddaso",
+      "description": "9998898",
+      "image": "http://res.cloudinary.com/linh-asm/image/upload/v1658500538/cellphones/a2iaywaufeklp0pjg9jq.jpg",
+      "id": 9
     }
   ]
 }

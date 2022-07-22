@@ -67,7 +67,7 @@ const UploadImage = ({ onUploadImage, productImage, onRemoveImage }: Props) => {
               accept='image/png, image/jpg, image/jpeg '
               hidden
             />
-            <Typography.Title level={5}>Thêm ảnh</Typography.Title>
+            <Typography.Title style={{color: '#3D5170', fontSize: '24px'}} level={5}>Thêm ảnh</Typography.Title>
           </>
         )}
       </UploadWrapper>
