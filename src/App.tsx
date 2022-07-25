@@ -7,6 +7,7 @@ import UserLayout from './components/Layout/User/User';
 import Home from './pages/Home';
 import Add from './pages/Admin/products/Add';
 import Edit from './pages/Admin/products/Edit';
+import CategoriesAdminPage from './pages/Admin/categories';
 
 function App() {
   return (
@@ -21,6 +22,9 @@ function App() {
             <Route index element={<ProductAdminPage />} />
             <Route path='add' element={<Add />} />
             <Route path='edit/:id' element={<Edit />} />
+          </Route>
+          <Route path='categories' >
+            <Route index element={<CategoriesAdminPage />} />
           </Route>
         </Route>
       </Routes>
