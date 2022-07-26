@@ -10,7 +10,7 @@
       "description": "Apple iPhone 13 Pro Max",
       "image": "http://res.cloudinary.com/linh-asm/image/upload/v1658501907/cellphones/qofvpmyfw7yiu4bnguq5.webp",
       "id": 1,
-      "status": false
+      "status": true
     },
     {
       "name": "Apple iPhone 13 Pro Max",
@@ -53,17 +53,6 @@
       "description": "Apple Watch Series 3 GPS Sport Band (Viền Nhôm, Dây Cao Su)",
       "image": "http://res.cloudinary.com/linh-asm/image/upload/v1658539296/cellphones/d53b50c8x6chtamhurrp.jpg",
       "id": 5,
-      "status": true
-    },
-    {
-      "name": "asdasdiodahsio",
-      "originalPrice": 989889,
-      "saleOffPrice": 8888,
-      "categories": "tablet",
-      "feature": "988998",
-      "description": "98dha9dh8",
-      "image": "http://res.cloudinary.com/dv3vzmogk/image/upload/v1658331782/anhhtus/e9j68eiol26fdukq6uyi.png",
-      "id": 6,
       "status": true
     },
     {

@@ -8,6 +8,7 @@ import Banner3 from '../../assets/images/banner3.png';
 import Banner4 from '../../assets/images/banner4.png';
 import Banner5 from '../../assets/images/banner5.png';
 import Banner6 from '../../assets/images/banner6.png';
+import ProductCard from '../../components/Product/ProductCard';
 type Props = {};
 
 const Home = (props: Props) => {
@@ -24,6 +25,7 @@ const Home = (props: Props) => {
           ))}
         </SliderContainer>
       </HomeTopContent>
+      <ProductCard />
     </>
   );
 };
@@ -36,7 +38,7 @@ const HomeTopContent = styled.div`
 
 const SliderContainer = styled(Carousel)`
   width: calc(1200px - 300px);
-  max-width: 1200px;; 
+  max-width: 1200px;
   margin: 0 auto;
 `;
 
