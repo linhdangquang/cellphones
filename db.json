@@ -10,7 +10,7 @@
       "description": "Apple iPhone 13 Pro Max",
       "image": "http://res.cloudinary.com/linh-asm/image/upload/v1658501907/cellphones/qofvpmyfw7yiu4bnguq5.webp",
       "id": 1,
-      "status": true
+      "status": false
     },
     {
       "name": "Apple iPhone 13 Pro Max",
@@ -21,7 +21,7 @@
       "description": "Cần có gói cước dữ liệu. Mạng 5G chỉ khả dụng ở một số thị trường và được cung cấp qua một số nhà mạng. Tốc độ có thể thay đổi tùy địa điểm và nhà mạng. Để biết thông tin về hỗ trợ mạng 5G, vui lòng liên hệ nhà mạng và truy cập apple.com/iphone/cellular.\n\n2Thời lượng pin khác nhau tùy theo cách sử dụng và cấu hình. Truy cập apple.com/batteries để biết thêm thông tin.\n\n",
       "image": "http://res.cloudinary.com/linh-asm/image/upload/v1658501920/cellphones/c3r5w3ysgkupofqceor8.webp",
       "id": 2,
-      "status": true
+      "status": false
     },
     {
       "name": "Macbook Pro 13",
@@ -86,7 +86,7 @@
       "description": "9998898",
       "image": "http://res.cloudinary.com/linh-asm/image/upload/v1658500538/cellphones/a2iaywaufeklp0pjg9jq.jpg",
       "id": 9,
-      "status": true
+      "status": false
     }
   ],
   "categories": [

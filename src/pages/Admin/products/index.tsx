@@ -3,25 +3,25 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import type { ColumnsType } from 'antd/es/table';
 import { formatVND } from '../../../utils/formatVND';
-import {
-  changeStatusProduct,
-  deleteProduct,
-  getAllPros,
-} from '../../../api/products';
 import { ReactComponent as ToogleIcon } from '../../../assets/images/Toggle-on.svg';
 import { ReactComponent as EditIcon } from '../../../assets/images/Edit.svg';
 import './products.css';
 import { Link } from 'react-router-dom';
 import { DeleteOutlined, PlusSquareOutlined } from '@ant-design/icons';
 import { FormSelect } from '../../../components/Product/ProductForm';
+import {
+  useChangeStatusProductMutation,
+  useDeleteProductMutation,
+  useGetProductsQuery,
+} from '../../../services/products-api';
 
 const { Option } = Select;
 const ProductAdminPage = () => {
-  const [products, setProducts] = useState<any[]>([]);
-  const [loading, setLoading] = useState(false);
+  const { data, isLoading, error } = useGetProductsQuery();
+  const [delProduct] = useDeleteProductMutation();
+  const [changeStatus] = useChangeStatusProductMutation();
   const [filterInfo, setFilterInfo] = useState<any>([]);
-  console.log(filterInfo);
-  const dataSource = products?.map((item, idx) => {
+  const dataSource = data?.map((item, idx) => {
     return { ...item, key: idx + 1 };
   });
   const setFilterValue = (value: any) => {
@@ -30,23 +30,25 @@ const ProductAdminPage = () => {
   const clearFilter = () => {
     setFilterInfo([]);
   };
-  const changeStatus = async (id: any) => {
+  const changeStatusHandler = async (id: any) => {
+    console.log(id);
     try {
-      setLoading(true);
-      const data = products.find((item: any) => item.id === id);
-      await changeStatusProduct({ ...data, status: !data.status });
+      console.log(id);
+      const product = data?.find((item) => item.id === id);
+      await changeStatus({ ...product, status: !product.status });
       message.success('Thay đổi trạng thái thành công');
     } catch (error) {
       message.error('Thay đổi trạng thái thất bại');
     } finally {
-      setLoading(false);
     }
   };
   const onConfirmDelete = async (id: any) => {
-    console.log(id);
-    await deleteProduct(id);
-    message.success('Xóa thành công');
-    setProducts(products.filter((item: any) => item.id !== id));
+    try {
+      await delProduct(id);
+      message.success('Xóa thành công');
+    } catch (error) {
+      message.error('Xóa thất bại');
+    }
   };
   const columns: ColumnsType<any> = [
     {
@@ -104,7 +106,6 @@ const ProductAdminPage = () => {
       key: 'id',
       dataIndex: 'id',
       render: (text: any, record): any => {
-        console.log(record.status);
         if (record.status === true)
           return (
             <div className='cursor-pointer'>
@@ -112,7 +113,7 @@ const ProductAdminPage = () => {
                 title='Thay đổi trạng thái hiện thị?'
                 okText='Có'
                 cancelText='Không'
-                onConfirm={() => changeStatus(text)}
+                onConfirm={() => changeStatusHandler(text)}
               >
                 <ToogleIcon width='50px' />
               </Popconfirm>
@@ -125,7 +126,7 @@ const ProductAdminPage = () => {
                 title='Thay đổi trạng thái hiện thị?'
                 okText='Có'
                 cancelText='Không'
-                onConfirm={() => changeStatus(text)}
+                onConfirm={() => changeStatusHandler(text)}
               >
                 <svg
                   width='22'
@@ -177,16 +178,6 @@ const ProductAdminPage = () => {
       ),
     },
   ];
-
-  useEffect(() => {
-    const getProducts = async () => {
-      setLoading(true);
-      const { data } = await getAllPros();
-      setLoading(false);
-      setProducts(data);
-    };
-    getProducts();
-  }, [loading]);
   return (
     <>
       <TitleContainer>
@@ -215,14 +206,18 @@ const ProductAdminPage = () => {
           {filterInfo.length > 0 && <Button onClick={clearFilter}>Xóa</Button>}
         </SelectContainer>
       </FilterContainer>
-      <Table
-        loading={loading}
-        dataSource={dataSource}
-        tableLayout='fixed'
-        columns={columns}
-        size='small'
-        pagination={{ showSizeChanger: true }}
-      />
+      {error ? (
+        <h1>Error</h1>
+      ) : (
+        <Table
+          loading={isLoading}
+          dataSource={dataSource}
+          tableLayout='fixed'
+          columns={columns}
+          size='small'
+          pagination={{ showSizeChanger: true }}
+        />
+      )}
     </>
   );
 };
