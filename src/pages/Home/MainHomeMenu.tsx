@@ -43,7 +43,7 @@ const items: MenuItem[] = [
     'sub1',
     <Link to='phone'>
       {' '}
-      <MobileOutlined style={{ fontSize: '24px' }} />
+      <MobileOutlined style={{ fontSize: '24px', color: '#000' }} />
     </Link>,
     [
       getItem(
@@ -67,7 +67,7 @@ const items: MenuItem[] = [
     'sub2',
     <Link to='laptop'>
       {' '}
-      <LaptopOutlined style={{ fontSize: '24px' }} />
+      <LaptopOutlined style={{ fontSize: '24px', color: '#000' }} />
     </Link>,
     [
       getItem(
@@ -91,7 +91,7 @@ const items: MenuItem[] = [
     'sub6',
     <Link to='maytinhbang'>
       {' '}
-      <TabletOutlined style={{ fontSize: '24px' }} />
+      <TabletOutlined style={{ fontSize: '24px', color: '#000' }} />
     </Link>,
     []
   ),
@@ -100,7 +100,7 @@ const items: MenuItem[] = [
     'sub7',
     <Link to='amthanh'>
       {' '}
-      <CustomerServiceOutlined style={{ fontSize: '24px' }} />
+      <CustomerServiceOutlined style={{ fontSize: '24px', color: '#000' }} />
     </Link>,
     []
   ),
@@ -109,7 +109,7 @@ const items: MenuItem[] = [
     'sub8',
     <Link to='dongho'>
       {' '}
-      <ClockCircleOutlined style={{ fontSize: '24px' }} />
+      <ClockCircleOutlined style={{ fontSize: '24px', color: '#000' }} />
     </Link>,
     []
   ),
@@ -118,7 +118,7 @@ const items: MenuItem[] = [
     'sub9',
     <Link to='nhathongminh'>
       {' '}
-      <HomeOutlined style={{ fontSize: '24px' }} />
+      <HomeOutlined style={{ fontSize: '24px', color: '#000' }} />
     </Link>,
     []
   ),
@@ -127,7 +127,7 @@ const items: MenuItem[] = [
     'sub10',
     <Link to='phukien'>
       {' '}
-      <UsbOutlined style={{ fontSize: '24px' }} />
+      <UsbOutlined style={{ fontSize: '24px', color: '#000' }} />
     </Link>,
     []
   ),
@@ -136,7 +136,7 @@ const items: MenuItem[] = [
     'sub11',
     <Link to='pc'>
       {' '}
-      <DesktopOutlined style={{ fontSize: '24px' }} />
+      <DesktopOutlined style={{ fontSize: '24px', color: '#000' }} />
     </Link>,
     []
   ),
@@ -145,7 +145,7 @@ const items: MenuItem[] = [
     'sub12',
     <Link to='tivi'>
       {' '}
-      <WalletOutlined style={{ fontSize: '24px' }} />
+      <WalletOutlined style={{ fontSize: '24px', color: '#000' }} />
     </Link>,
     []
   ),
@@ -154,7 +154,7 @@ const items: MenuItem[] = [
     'sub13',
     <Link to='thucu'>
       {' '}
-      <RollbackOutlined style={{ fontSize: '24px' }} />
+      <RollbackOutlined style={{ fontSize: '24px', color: '#000' }} />
     </Link>,
     []
   ),
@@ -163,7 +163,7 @@ const items: MenuItem[] = [
     'sub14',
     <Link to='hangcu'>
       {' '}
-      <CheckCircleOutlined style={{ fontSize: '24px' }} />
+      <CheckCircleOutlined style={{ fontSize: '24px', color: '#000' }} />
     </Link>,
     []
   ),
@@ -172,7 +172,7 @@ const items: MenuItem[] = [
     'sub15',
     <Link to='khuyenmai'>
       {' '}
-      <DollarCircleOutlined style={{ fontSize: '24px' }} />
+      <DollarCircleOutlined style={{ fontSize: '24px', color: '#000' }} />
     </Link>,
     []
   ),
@@ -181,7 +181,7 @@ const items: MenuItem[] = [
     'sub16',
     <Link to='tincongnghe'>
       {' '}
-      <ProfileOutlined style={{ fontSize: '24px' }} />
+      <ProfileOutlined style={{ fontSize: '24px', color: '#000' }} />
     </Link>,
     []
   ),

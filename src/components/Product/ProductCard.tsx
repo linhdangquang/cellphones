@@ -1,29 +1,42 @@
 import { Rate } from 'antd';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import product from '../../assets/images/mockproductimage.png';
-
-type Props = {};
+import { IProduct } from '../../types/product';
+import { formatVND } from '../../utils/formatVND';
 
 const ProductCardContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: calc(100% / 5 - 20px);
+  width: calc(100% / 5 - 50px);
+  height: auto;
 `;
 
-const ProductImage = styled.img`
-  width: 160px;
+const ProductImage = styled.div`
   height: 160px;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 `;
 
-const ProductTitle = styled.a`
+const ProductTitle = styled.div`
+  width: 100%;
+  height: 40px;
   font-size: 14px;
   line-height: 21px;
-  color: #444444;
   margin-top: 10px;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
+  text-align: center;
+
+  a {
+    height: 100%;
+    width: 100%;
+    color: #444444;
+  }
 `;
 
 const ProductPriceContent = styled.div`
@@ -46,7 +59,7 @@ const ProductPrice = styled.p`
   line-height: 17.6px;
 `;
 
-const ProductEventMessage = styled.div`
+export const ProductEventMessage = styled.div`
   background-color: #f3f4f6;
   border: 2px solid #e5e7eb;
   color: #444444;
@@ -67,7 +80,7 @@ const RateContainer = styled.div`
 const RateQuantity = styled.div`
   font-size: 12px;
   color: #444444;
-`
+`;
 
 const ProductRate = styled(Rate)`
   .ant-rate-star,
@@ -88,14 +101,28 @@ const ProductRate = styled(Rate)`
   }
 `;
 
-const ProductCard = (props: Props) => {
+type Props = {
+  product: IProduct;
+};
+
+const ProductCard = ({ product }: Props) => {
   return (
     <ProductCardContainer>
-      <ProductImage src={product} />
-      <ProductTitle href='/as'>iPhone 11 64GB I Chính hãng VN/A</ProductTitle>
+      <ProductImage>
+        <Link to={`/products/${product.id}`}>
+          <img src={product.image} alt={product.name} />
+        </Link>
+      </ProductImage>
+      <ProductTitle>
+        <Link to={`/products/${product.id}`}>{product.name}</Link>
+      </ProductTitle>
       <ProductPriceContent>
-        <ProductPriceSale>1.199.000 đ</ProductPriceSale>
-        <ProductPrice>10.299.000 đ</ProductPrice>
+        {product.saleOffPrice && (
+          <ProductPriceSale>
+            ${formatVND(product.saleOffPrice)}
+          </ProductPriceSale>
+        )}
+        <ProductPrice>${formatVND(product.originalPrice)}</ProductPrice>
       </ProductPriceContent>
       <ProductEventMessage>
         [HOT] Thu cũ lên đời giá cao - Thủ tục nhanh - Trợ giá lên tới

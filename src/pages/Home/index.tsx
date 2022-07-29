@@ -8,7 +8,8 @@ import Banner3 from '../../assets/images/banner3.png';
 import Banner4 from '../../assets/images/banner4.png';
 import Banner5 from '../../assets/images/banner5.png';
 import Banner6 from '../../assets/images/banner6.png';
-import ProductCard from '../../components/Product/ProductCard';
+import { useAppSelector } from '../../app/hooks';
+import ProductsContainer from '../../components/Product/ProductsContainer';
 type Props = {};
 
 const Home = (props: Props) => {
@@ -25,15 +26,16 @@ const Home = (props: Props) => {
           ))}
         </SliderContainer>
       </HomeTopContent>
-      <ProductCard />
+      <ProductsContainer />
     </>
   );
 };
 
 const HomeTopContent = styled.div`
-  margin: 15px 0;
+  margin: 15px auto;
   display: flex;
   column-gap: 50px;
+  width: 1200px;
 `;
 
 const SliderContainer = styled(Carousel)`
