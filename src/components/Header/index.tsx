@@ -3,11 +3,10 @@ import styled from 'styled-components';
 import LogoImage from '../../assets/images/logo.png';
 import AutoComplete from '../Input/AutoComplete';
 import { IoLocationOutline } from 'react-icons/io5';
-import { MdOutlineShoppingBag } from 'react-icons/md';
 import { TbTruckDelivery } from 'react-icons/tb';
 import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../app/hooks';
-import { ShoppingCartOutlined, ShoppingOutlined } from '@ant-design/icons';
+import { ShoppingOutlined } from '@ant-design/icons';
 
 const Header = () => {
   const { totalItems } = useAppSelector((state) => state.cart);
@@ -38,7 +37,13 @@ const Header = () => {
                 <ShoppingOutlined style={{ fontSize: '25px' }} />
               </CartIcon>
             </Link>
-            <Link  to={'/cart'}>Giỏ hàng</Link>
+            <Link to={'/cart'}>Giỏ hàng</Link>
+          </RightContainerItem>
+          <RightContainerItem>
+            <Link to={'/signin'}>Đăng nhập</Link>
+          </RightContainerItem>
+          <RightContainerItem>
+            <Link to={'/signup'}>Đăng ký</Link>
           </RightContainerItem>
         </RightContainer>
       </Container>

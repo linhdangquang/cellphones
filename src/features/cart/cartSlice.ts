@@ -14,6 +14,7 @@ export interface Cart {
   totalItems: number;
 }
 
+
 const initialState: Cart = {
   products: [],
   total: 0,

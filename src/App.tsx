@@ -12,6 +12,8 @@ import Product from './pages/Home/product';
 import { ScrollToTop } from './components/ScrollToTop';
 import { ToastContainer } from 'react-toastify';
 import CartPage from './pages/Home/cart';
+import SignIn from './pages/Home/signin';
+import SignUp from './pages/Home/signup';
 
 function App() {
   return (
@@ -26,6 +28,8 @@ function App() {
             </Route>
             <Route path='cart' element={<CartPage />} />
           </Route>
+          <Route path='signin' element={<SignIn />} />
+          <Route path='signup' element={<SignUp />} />
           <Route path='admin' element={<AdminLayout />}>
             <Route index element={<Navigate to='products' />} />
             <Route path='products'>

@@ -1,6 +1,5 @@
-import { Button } from 'antd';
 import React from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useGetProductQuery } from '../../../services/products-api';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { addToCart } from '../../../features/cart/cartSlice';
@@ -32,9 +31,7 @@ const Product = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { data, isLoading } = useGetProductQuery(id);
-  const cart = useAppSelector((state) => state.cart);
   const dispatch = useAppDispatch();
-  console.log(cart);
 
   const addToCartHandler = () => {
     dispatch(addToCart(data as IProduct));
