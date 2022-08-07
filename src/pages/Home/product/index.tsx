@@ -1,6 +1,10 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useGetProductQuery } from '../../../services/products-api';
+import {
+  useGetProductQuery,
+  useGetProductsByCategoryQuery,
+  useGetProductsQuery,
+} from '../../../services/products-api';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { addToCart } from '../../../features/cart/cartSlice';
 import { LoadingContainer } from '../../../components/Loading/LoadingContainer';
@@ -15,6 +19,8 @@ import {
   PayNowButton,
   ProductInfo,
   ProductInfoContent,
+  ProductRelated,
+  ProductRelatedContainer,
   ProductShortInfo,
   ProductTitle,
 } from './products.styles';
@@ -26,11 +32,16 @@ import {
 import { IProduct } from '../../../types/product';
 import { formatVND } from '../../../utils/formatVND';
 import { ShoppingCartOutlined } from '@ant-design/icons';
+import ProductCard from '../../../components/Product/ProductCard';
 
 const Product = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { data, isLoading } = useGetProductQuery(id);
+  const products = useGetProductsByCategoryQuery(data?.categories);
+  const productsRelated = products?.data
+    ?.filter((product) => product.id !== parseInt(id!))
+    .slice(0, 5);
   const dispatch = useAppDispatch();
 
   const addToCartHandler = () => {
@@ -63,12 +74,7 @@ const Product = () => {
                   {formatVND(data?.originalPrice)}
                 </ItemPriceRegular>
               </ItemPrice>
-              <ProductShortInfo>
-                Mô tả ngắn: Trước khi mua bất kỳ chiếc điện thoại nào, người
-                dùng cũng sẽ quan tâm đến thiết kế sản phẩm trước. Với phiên bản
-                A73, Samsung đã tạo nên một chiếc smartphone với vẻ ngoài mang
-                đến cảm giác sang trọng và tinh tế.
-              </ProductShortInfo>
+              <ProductShortInfo>Mô tả ngắn: {data?.feature}</ProductShortInfo>
             </ProductInfo>
           </ProductInfoContent>
           <HandleContainer>
@@ -87,6 +93,14 @@ const Product = () => {
               </AddToCartButtonContainer>
             </ButtonsContainer>
           </HandleContainer>
+          <ProductRelated>
+            <h3>Sản phẩm cùng loại</h3>
+            <ProductRelatedContainer>
+              {productsRelated?.map((product, idx) => (
+                <ProductCard key={idx} product={product} />
+              ))}
+            </ProductRelatedContainer>
+          </ProductRelated>
         </PageContainer>
       )}
     </>

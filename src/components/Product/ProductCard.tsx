@@ -119,10 +119,10 @@ const ProductCard = ({ product }: Props) => {
       <ProductPriceContent>
         {product.saleOffPrice && (
           <ProductPriceSale>
-            ${formatVND(product.saleOffPrice)}
+            {formatVND(product.saleOffPrice)}
           </ProductPriceSale>
         )}
-        <ProductPrice>${formatVND(product.originalPrice)}</ProductPrice>
+        <ProductPrice>{formatVND(product.originalPrice)}</ProductPrice>
       </ProductPriceContent>
       <ProductEventMessage>
         [HOT] Thu cũ lên đời giá cao - Thủ tục nhanh - Trợ giá lên tới

@@ -39,55 +39,25 @@ function getItem(
 
 const items: MenuItem[] = [
   getItem(
-    <Link to='phone'>Điện thoại</Link>,
+    <Link to='categories/phone'>Điện thoại</Link>,
     'sub1',
     <Link to='phone'>
       {' '}
       <MobileOutlined style={{ fontSize: '24px', color: '#000' }} />
     </Link>,
-    [
-      getItem(
-        'Item 1',
-        null,
-        null,
-        [getItem('Option 1', '1'), getItem('Option 2', '2')],
-        'group'
-      ),
-      getItem(
-        'Item 2',
-        null,
-        null,
-        [getItem('Option 3', '3'), getItem('Option 4', '4')],
-        'group'
-      ),
-    ]
+    []
   ),
   getItem(
-    <Link to='laptop'>Laptop</Link>,
+    <Link to='categories/laptop'>Laptop</Link>,
     'sub2',
-    <Link to='laptop'>
+    <Link to='categories/laptop'>
       {' '}
       <LaptopOutlined style={{ fontSize: '24px', color: '#000' }} />
     </Link>,
-    [
-      getItem(
-        'Item 1',
-        null,
-        null,
-        [getItem('Option 1', '7'), getItem('Option 2', '6')],
-        'group'
-      ),
-      getItem(
-        'Item 2',
-        null,
-        null,
-        [getItem('Option 3', '10'), getItem('Option 4', '12')],
-        'group'
-      ),
-    ]
+    []
   ),
   getItem(
-    <Link to='maytinhbang'>Máy tính bảng</Link>,
+    <Link to='categories/tablet'>Máy tính bảng</Link>,
     'sub6',
     <Link to='maytinhbang'>
       {' '}

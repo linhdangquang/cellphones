@@ -6,16 +6,17 @@ import {
   message,
 } from 'antd';
 import UploadImage from '../../../components/Product/UploadImage';
-import { createProduct } from '../../../api/products';
 import { useNavigate } from 'react-router-dom';
 import { PageTitle, TitleContainer } from '.';
 import { uploadImage } from '../../../utils/uploadImageHandle';
 import ProductForm from '../../../components/Product/ProductForm';
+import { useAddProductMutation } from '../../../services/products-api';
 
 
 const Add: React.FC = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState<boolean>(false);
+  const [createProduct] = useAddProductMutation();
   const [base64Image, setBase64Image] = useState<string>('');
   const onUploadImage = (base64: string) => {
     setBase64Image(base64);

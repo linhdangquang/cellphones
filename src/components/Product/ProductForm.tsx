@@ -1,15 +1,8 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import {
-  Col,
-  Row,
-  Button,
-  Form,
-  Input,
-  InputNumber,
-  Select,
-} from 'antd';
+import { Col, Row, Button, Form, Input, InputNumber, Select } from 'antd';
 import { currencyFormatter, currencyParser } from '../../utils/formatVND';
+import { useGetCategoriesQuery } from '../../services/categories-api';
 
 type Props = {
   onFinish: (values: any) => void;
@@ -26,6 +19,7 @@ const ProductForm = ({
   loading,
   formData,
 }: Props) => {
+  const categories =  useGetCategoriesQuery();
   const [form] = Form.useForm();
   useEffect(() => {
     if (formData) {
@@ -35,7 +29,7 @@ const ProductForm = ({
   return (
     <Form
       form={form}
-      name="product"
+      name='product'
       initialValues={{
         originalPrice: '',
         saleOffPrice: '',
@@ -102,13 +96,10 @@ const ProductForm = ({
             name='categories'
             rules={[{ required: true, message: 'Phân loại không được trống' }]}
           >
-            <FormSelect size='large'>
-              <Option value='phone'>Điện thoại</Option>
-              <Option value='laptop'>Laptop</Option>
-              <Option value='accessories' disabled>
-                Phụ kiện
-              </Option>
-              <Option value='tablet'>Máy tính bảng</Option>
+            <FormSelect size='large' loading={categories.isLoading}>
+              {categories.data && categories.data.map((category) => (
+                <Option key={category.id} value={category.name}>{category.displayName}</Option>
+              ))}
             </FormSelect>
           </Form.Item>
         </Col>

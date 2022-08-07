@@ -14,15 +14,29 @@ import {
   SignInWithOther,
   SignInWithOtherContainer,
 } from './signin.styles';
-import { Form } from 'antd';
+import { Form, message } from 'antd';
+import { signIn } from '../../../api/auth';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 type Props = {};
 
 const SignIn = (props: Props) => {
   const [form] = Form.useForm();
-
-  const onFinish = (values: any) => {
-    console.log('Received values of form: ', values);
+  const navigate = useNavigate();
+  const onFinish = async (values: any) => {
+    try {
+      const { data } = await signIn(values);
+      localStorage.setItem('user',JSON.stringify(data));
+      toast.success('Đăng nhập thành công');
+      if (data.user.admin) {
+        navigate('/admin');
+      } else {
+        navigate('/');
+      }
+    } catch (error: any) {
+      message.error('Đăng nhập thất bại,' + error.response.data);
+    }
   };
 
   const onFinishFailed = (errorInfo: any) => {

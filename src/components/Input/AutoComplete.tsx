@@ -11,7 +11,6 @@ const AutoComplete: React.FC = () => {
   const [searchData, setSearchData] = useState<any>([]);
 
   function renderOption(item: any) {
-    console.log(item);
     return (
       <Option >
         <div

@@ -1,5 +1,5 @@
 import { Button, Image, message, Popconfirm, Select, Table } from 'antd';
-import React, { useEffect, useState } from 'react';
+import React, {  useState } from 'react';
 import styled from 'styled-components';
 import type { ColumnsType } from 'antd/es/table';
 import { formatVND } from '../../../utils/formatVND';
@@ -14,10 +14,12 @@ import {
   useDeleteProductMutation,
   useGetProductsQuery,
 } from '../../../services/products-api';
+import { useGetCategoriesQuery } from '../../../services/categories-api';
 
 const { Option } = Select;
 const ProductAdminPage = () => {
   const { data, isLoading, error } = useGetProductsQuery();
+  const categories = useGetCategoriesQuery();
   const [delProduct] = useDeleteProductMutation();
   const [changeStatus] = useChangeStatusProductMutation();
   const [filterInfo, setFilterInfo] = useState<any>([]);
@@ -80,25 +82,12 @@ const ProductAdminPage = () => {
       title: 'Loại',
       key: 'categories',
       dataIndex: 'categories',
-      // filters: [
-      //   { text: 'Điện thoại', value: 'phone' },
-      //   { text: 'Laptop', value: 'laptop' },
-      //   { text: 'Máy tính bảng', value: 'tablet' },
-      //   { text: 'Phụ kiện', value: 'accessories' },
-      // ],
       filteredValue: filterInfo || null,
       onFilter: (value: any, record) =>
         record?.categories?.indexOf(value) === 0,
       render: (text: any): any => {
-        if (text === 'phone') {
-          return <>Điện thoại</>;
-        } else if (text === 'laptop') {
-          return <>Laptop</>;
-        } else if (text === 'tablet') {
-          return <>Máy tính bảng</>;
-        } else if (text === 'accessories') {
-          return <>Phụ kiện</>;
-        }
+        const category = categories.data?.find((item) => item.name === text);
+        return category?.displayName;
       },
     },
     {
@@ -196,11 +185,11 @@ const ProductAdminPage = () => {
               value={filterInfo}
               placeholder='Chọn loại'
               style={{ width: 300 }}
+              loading={categories.isLoading}
             >
-              <Option value='phone'>Điện thoại</Option>
-              <Option value='laptop'>Laptop</Option>
-              <Option value='accessories'>Phụ kiện</Option>
-              <Option value='tablet'>Máy tính bảng</Option>
+              {categories.data?.map((item) => (
+                <Option key={item.id} value={item.name}>{item.displayName}</Option>
+              ))}
             </FormSelect>
           </div>
           {filterInfo.length > 0 && <Button onClick={clearFilter}>Xóa</Button>}

@@ -3,14 +3,17 @@ import { Typography, Col, Row, message } from 'antd';
 import UploadImage from '../../../components/Product/UploadImage';
 import { useNavigate, useParams } from 'react-router-dom';
 import { PageTitle, TitleContainer } from '.';
-import { getProduct, updateProduct } from '../../../api/products';
 import { uploadImage } from '../../../utils/uploadImageHandle';
 import ProductForm from '../../../components/Product/ProductForm';
+import {
+  useGetProductQuery,
+  useUpdateProductMutation,
+} from '../../../services/products-api';
 
 const Edit: React.FC = () => {
   const navigate = useNavigate();
+  const [updateProduct] = useUpdateProductMutation();
   const [loading, setLoading] = useState<boolean>(false);
-  const [product, setProduct] = useState<any>();
   const [isRemoveImage, setIsRemoveImage] = useState<boolean>(false);
   const [base64Image, setBase64Image] = useState<string>('');
   const onRemoveImage = () => {
@@ -21,6 +24,8 @@ const Edit: React.FC = () => {
     setBase64Image(base64);
   };
   const { id } = useParams();
+  const { data} = useGetProductQuery(id);
+  const product = data;
   const onFinish = async (values: any) => {
     try {
       setLoading(true);
@@ -35,7 +40,7 @@ const Edit: React.FC = () => {
       } else if (isRemoveImage) {
         await updateProduct({ ...values, id, image: '' });
       } else {
-        values.image = product.image;
+        values.image = product?.image;
         await updateProduct({ ...values, id });
       }
       message.success('Cập nhật thành công');
@@ -51,13 +56,6 @@ const Edit: React.FC = () => {
     console.log('Failed:', errorInfo);
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data } = await getProduct(id);
-      setProduct(data);
-    };
-    fetchData();
-  }, [id]);
   return (
     <>
       <TitleContainer>

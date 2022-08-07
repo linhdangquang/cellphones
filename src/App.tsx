@@ -14,6 +14,8 @@ import { ToastContainer } from 'react-toastify';
 import CartPage from './pages/Home/cart';
 import SignIn from './pages/Home/signin';
 import SignUp from './pages/Home/signup';
+import CategoryProduct from './pages/Home/category';
+import Guard from './components/Guard';
 
 function App() {
   return (
@@ -23,14 +25,24 @@ function App() {
           <Route path='/' element={<UserLayout />}>
             <Route index element={<Home />} />
             <Route path='products'>
-              <Route index element={<h1>Product Page</h1> } />
+              <Route index element={<h1>Product Page</h1>} />
               <Route path=':id' element={<Product />} />
+            </Route>
+            <Route path='categories'>
+              <Route path=':categoryName' element={<CategoryProduct />} />
             </Route>
             <Route path='cart' element={<CartPage />} />
           </Route>
           <Route path='signin' element={<SignIn />} />
           <Route path='signup' element={<SignUp />} />
-          <Route path='admin' element={<AdminLayout />}>
+          <Route
+            path='admin'
+            element={
+              <Guard>
+                <AdminLayout />
+              </Guard>
+            }
+          >
             <Route index element={<Navigate to='products' />} />
             <Route path='products'>
               <Route index element={<ProductAdminPage />} />
@@ -42,8 +54,8 @@ function App() {
             </Route>
           </Route>
         </Routes>
-        <ToastContainer 
-          position="bottom-right"
+        <ToastContainer
+          position='bottom-right'
           autoClose={3000}
           hideProgressBar={false}
         />

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import LogoImage from '../../assets/images/logo.png';
 import AutoComplete from '../Input/AutoComplete';
@@ -7,9 +7,15 @@ import { TbTruckDelivery } from 'react-icons/tb';
 import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../app/hooks';
 import { ShoppingOutlined } from '@ant-design/icons';
+import { logOut } from '../../api/auth';
 
 const Header = () => {
   const { totalItems } = useAppSelector((state) => state.cart);
+  const [user, setUser] = React.useState<any>(null);
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user')!);
+    setUser(user);
+  }, []);
   return (
     <Wrapper>
       <Container>
@@ -39,12 +45,34 @@ const Header = () => {
             </Link>
             <Link to={'/cart'}>Giỏ hàng</Link>
           </RightContainerItem>
-          <RightContainerItem>
-            <Link to={'/signin'}>Đăng nhập</Link>
-          </RightContainerItem>
-          <RightContainerItem>
-            <Link to={'/signup'}>Đăng ký</Link>
-          </RightContainerItem>
+          {user === null ? (
+            <>
+              <RightContainerItem>
+                <Link to={'/signin'}>Đăng nhập</Link>
+              </RightContainerItem>
+              <RightContainerItem>
+                <Link to={'/signup'}>Đăng ký</Link>
+              </RightContainerItem>
+            </>
+          ) : (
+            <>
+              <RightContainerItem>
+                <div>
+                  {user?.user?.email.slice(0, user?.user?.email.indexOf('@'))}
+                </div>
+              </RightContainerItem>
+              <RightContainerItem>
+                <div
+                  onClick={() => {
+                    logOut();
+                    setUser(null);
+                  }}
+                >
+                  Đăng xuất
+                </div>
+              </RightContainerItem>
+            </>
+          )}
         </RightContainer>
       </Container>
     </Wrapper>
@@ -88,8 +116,10 @@ const RightContainerItem = styled.div`
   font-size: 12px;
   position: relative;
 
-  a {
+  a,
+  div {
     color: #fff !important;
+    cursor: pointer;
   }
 `;
 

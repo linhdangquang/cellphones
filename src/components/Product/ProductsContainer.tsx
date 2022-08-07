@@ -6,7 +6,7 @@ import { LoadingContainer } from '../Loading/LoadingContainer';
 import HomeLoading from '../Loading/HomeLoading';
 type Props = {};
 
-const ProductsContainerStyled = styled.div`
+export const ProductsContainerStyled = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -15,7 +15,7 @@ const ProductsContainerStyled = styled.div`
   gap: 30px 50px;
   padding: 20px 50px;
 `;
-const ContainerTitle = styled.div`
+export const ContainerTitle = styled.div`
   font-size: 22px;
   color: #444444;
   width: 1200px;
@@ -24,7 +24,7 @@ const ContainerTitle = styled.div`
 `;
 
 const ProductsContainer = (props: Props) => {
-  const { data, isLoading, isFetching } = useGetProductsQuery();
+  const { data, isLoading } = useGetProductsQuery();
   return (
     <>
       <ContainerTitle>ĐIỆN THOẠI NỔI BẬT NHẤT</ContainerTitle>

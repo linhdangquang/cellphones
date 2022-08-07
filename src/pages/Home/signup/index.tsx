@@ -1,16 +1,37 @@
-import React from 'react'
-import { Container, Input, InputContainer, InputLabel, LogoContainer, SignInButton, SignInContent, SignInForm, SignInWithOther, SignInWithOtherContainer } from '../signin/signin.styles'
+import React from 'react';
+import {
+  Container,
+  Input,
+  InputContainer,
+  InputLabel,
+  LogoContainer,
+  SignInButton,
+  SignInContent,
+  SignInForm,
+  SignInWithOther,
+  SignInWithOtherContainer,
+} from '../signin/signin.styles';
 import googleicon from '../../../assets/images/googleicon.png';
 import facebookicon from '../../../assets/images/facebookicon.png';
 import logo from '../../../assets/images/logo.png';
-import { Form } from 'antd';
-type Props = {}
+import { Form, message } from 'antd';
+import { signUp } from '../../../api/auth';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+type Props = {};
 
 const SignUp = (props: Props) => {
   const [form] = Form.useForm();
-
-  const onFinish = (values: any) => {
-    console.log('Received values of form: ', values);
+  const navigate = useNavigate();
+  const onFinish = async (values: any) => {
+    try {
+      await signUp(values);
+      toast.success('Đăng ký thành công, vui lòng đăng nhập');
+      navigate('/signin');
+      form.resetFields();
+    } catch (error: any) {
+      message.error('Đăng ký thất bại,' + error.response.data);
+    }
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -19,7 +40,7 @@ const SignUp = (props: Props) => {
   return (
     <Container>
       <SignInContent>
-      <SignInForm
+        <SignInForm
           name='signin'
           form={form}
           onFinish={onFinish}
@@ -44,9 +65,11 @@ const SignUp = (props: Props) => {
             <InputLabel>Số điện thoại</InputLabel>
             <Form.Item
               name='phone'
-              rules={[{ required: true, message: 'Số điện thoại không được trống' }]}
+              rules={[
+                { required: true, message: 'Số điện thoại không được trống' },
+              ]}
             >
-              <Input type='password' />
+              <Input  />
             </Form.Item>
           </InputContainer>
           <InputContainer>
@@ -62,7 +85,7 @@ const SignUp = (props: Props) => {
           <InputContainer>
             <Form.Item>
               <SignInButton htmlType='submit' type='primary'>
-                Đăng nhập
+                Đăng ký
               </SignInButton>
             </Form.Item>
           </InputContainer>
@@ -80,7 +103,7 @@ const SignUp = (props: Props) => {
         </LogoContainer>
       </SignInContent>
     </Container>
-  )
-}
+  );
+};
 
-export default SignUp
+export default SignUp;

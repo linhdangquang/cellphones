@@ -93,3 +93,21 @@ export const AddToCartButton = styled(Button)`
   border: #ff3945 2px solid !important;
   border-radius: 5px;
 `;
+
+export const ProductRelated = styled.div`
+  width: 1200px;
+  margin: 35px auto;
+  h3 {
+    font-size: 18px;
+  }
+`;
+
+export const ProductRelatedContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+  width: 100%;
+  margin-top: 30px;
+  justify-content: space-between;
+`
