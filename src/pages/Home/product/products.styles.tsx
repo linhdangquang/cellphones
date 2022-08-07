@@ -106,8 +106,8 @@ export const ProductRelatedContainer = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 50px;
   width: 100%;
   margin-top: 30px;
-  justify-content: space-between;
+  justify-content: flex-start;
 `
