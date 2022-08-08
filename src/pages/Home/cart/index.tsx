@@ -1,3 +1,4 @@
+import { Empty } from 'antd';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../../app/hooks';
@@ -54,6 +55,7 @@ const CartPage = (props: Props) => {
       ) : (
         <div>
           <h1>Giỏ hàng trống</h1>
+          <Empty description={false} />
         </div>
       )}
     </Container>

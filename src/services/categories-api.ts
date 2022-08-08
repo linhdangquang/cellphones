@@ -14,6 +14,9 @@ export const categoriesApi = createApi({
     getCategory: builder.query<any, any>({
       query: (id) => `categories/${id}`,
     }),
+    getCategoryByName: builder.query<any, any>({
+      query: (name) => `categories/?name=${name}`,
+    }),
     addCategory: builder.mutation<any, any>({
       query: (category) => ({
         url: 'categories',
@@ -44,6 +47,7 @@ export const categoriesApi = createApi({
 export const {
   useGetCategoryQuery,
   useGetCategoriesQuery,
+  useGetCategoryByNameQuery,
   useAddCategoryMutation,
   useUpdateCategoryMutation,
   useDeleteCategoryMutation,

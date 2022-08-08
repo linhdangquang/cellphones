@@ -1,9 +1,10 @@
 import { DeleteOutlined, PlusSquareOutlined } from '@ant-design/icons';
-import { message, Popconfirm, Table } from 'antd';
+import { Button, Form, Input, message, Popconfirm, Table } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
+  useAddCategoryMutation,
   useDeleteCategoryMutation,
   useGetCategoriesQuery,
 } from '../../../services/categories-api';
@@ -15,6 +16,9 @@ type Props = {};
 const CategoriesAdminPage = (props: Props) => {
   const { data, isLoading, error } = useGetCategoriesQuery();
   const [delCategory] = useDeleteCategoryMutation();
+  const [addCategory, { isLoading: isLoadingAddCategory }] =
+    useAddCategoryMutation();
+  const [form] = Form.useForm();
   const dataSource = data?.map((item, idx) => ({ ...item, key: idx + 1 }));
   const columns: ColumnsType<any> = [
     {
@@ -65,14 +69,52 @@ const CategoriesAdminPage = (props: Props) => {
       message.error('Xóa thất bại');
     }
   };
+  const onAddCategory = async (values: any) => {
+    try {
+      await addCategory(values);
+      form.resetFields();
+      message.success('Thêm thành công');
+    } catch (error) {
+      message.error('Thêm mới thất bại');
+    }
+  };
   return (
     <>
-      <TitleContainer>
-        <PageTitle>Điện thoại</PageTitle>
-        <Link to='add'>
-          <PlusSquareOutlined style={{ color: '#00B0D7', fontSize: '36px' }} />
-        </Link>
-      </TitleContainer>
+      <>
+        <TitleContainer>
+          <PageTitle>Loại hàng</PageTitle>
+        </TitleContainer>
+        <div style={{ marginBottom: '20px' }}>
+          <Form
+            layout='inline'
+            name='category-form'
+            form={form}
+            onFinish={onAddCategory}
+          >
+            <Form.Item
+              name='name'
+              rules={[{ required: true, message: 'Giá trị không được trống' }]}
+            >
+              <Input placeholder='Giá trị' />
+            </Form.Item>
+            <Form.Item
+              name='displayName'
+              rules={[{ required: true, message: 'Giá trị không được trống' }]}
+            >
+              <Input placeholder='Hiển thị' />
+            </Form.Item>
+            <Form.Item>
+              <Button
+                type='primary'
+                htmlType='submit'
+                loading={isLoadingAddCategory}
+              >
+                Thêm loại
+              </Button>
+            </Form.Item>
+          </Form>
+        </div>
+      </>
       {error ? (
         <h1>Error</h1>
       ) : (

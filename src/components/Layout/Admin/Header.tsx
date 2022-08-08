@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { AutoComplete, Input } from 'antd';
 import { Layout } from 'antd';
@@ -49,7 +49,12 @@ const SearchInput = styled(Input)`
   border-radius: 5px;
 `;
 
-const HeaderAdmin = (props: Props) => {
+const HeaderAdmin = () => {
+  const [user, setUser] = React.useState<any>(null);
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user')!);
+    setUser(user);
+  }, []);
   return (
     <HeaderCustom>
       <div className='logo-container'>
@@ -60,9 +65,8 @@ const HeaderAdmin = (props: Props) => {
         <SearchInput prefix={<SearchOutlined />} />
       </SearchContainer>
       <div className='user-header'>
-        <h2>Xin chào Đặng Quang Linh</h2>
+        <h2>Xin chào {user?.user?.email.slice(0, user?.user?.email.indexOf('@'))}</h2>
       </div>
-      {/* <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']} items={items1} /> */}
     </HeaderCustom>
   );
 };

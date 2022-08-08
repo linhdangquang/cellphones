@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../app/hooks';
 import { ShoppingOutlined } from '@ant-design/icons';
 import { logOut } from '../../api/auth';
+import { Avatar } from 'antd';
 
 const Header = () => {
   const { totalItems } = useAppSelector((state) => state.cart);
@@ -57,9 +58,9 @@ const Header = () => {
           ) : (
             <>
               <RightContainerItem>
-                <div>
+                <Avatar style={{backgroundColor: '#fff', color: '#000'}}>
                   {user?.user?.email.slice(0, user?.user?.email.indexOf('@'))}
-                </div>
+                </Avatar>
               </RightContainerItem>
               <RightContainerItem>
                 <div

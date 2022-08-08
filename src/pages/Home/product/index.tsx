@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
   useGetProductQuery,
   useGetProductsByCategoryQuery,
-  useGetProductsQuery,
 } from '../../../services/products-api';
-import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import { useAppDispatch } from '../../../app/hooks';
 import { addToCart } from '../../../features/cart/cartSlice';
 import { LoadingContainer } from '../../../components/Loading/LoadingContainer';
 import HomeLoading from '../../../components/Loading/HomeLoading';
@@ -33,11 +32,15 @@ import { IProduct } from '../../../types/product';
 import { formatVND } from '../../../utils/formatVND';
 import { ShoppingCartOutlined } from '@ant-design/icons';
 import ProductCard from '../../../components/Product/ProductCard';
+import BreadCrumbPage from '../../../components/BreadCrum';
+import { useGetCategoryByNameQuery } from '../../../services/categories-api';
 
 const Product = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { data, isLoading } = useGetProductQuery(id);
+  const category = useGetCategoryByNameQuery(data?.categories);
+  const [breadCrumb, setBreadCrumb] = useState<any>([]);
   const products = useGetProductsByCategoryQuery(data?.categories);
   const productsRelated = products?.data
     ?.filter((product) => product.id !== parseInt(id!))
@@ -52,6 +55,25 @@ const Product = () => {
     dispatch(addToCart(data as IProduct));
     navigate('/cart');
   };
+  useEffect(() => {
+    const breadCrumb = [
+      {
+        name: 'Trang chủ',
+        link: '/',
+      },
+      {
+        name: category?.data?.find(
+          (category: any) => category.name === data?.categories
+        )?.displayName,
+        link: `/categories/${data?.categories}`,
+      },
+      {
+        name: data?.name,
+        link: '',
+      },
+    ];
+    setBreadCrumb(breadCrumb);
+  }, [data, category]);
   return (
     <>
       {isLoading ? (
@@ -60,6 +82,7 @@ const Product = () => {
         </LoadingContainer>
       ) : (
         <PageContainer>
+          <BreadCrumbPage breadcrumbItems={breadCrumb} />
           <ProductTitle>{data?.name}</ProductTitle>
           <ProductInfoContent>
             <ImageContainer>

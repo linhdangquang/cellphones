@@ -39,7 +39,6 @@ const AutoComplete: React.FC = () => {
     );
   }
   async function search(value: string) {
-    console.log(value);
     if (value.length > 2) {
       const { data } = await axios.get(
         'http://localhost:3001/products?q=' + value
@@ -52,7 +51,6 @@ const AutoComplete: React.FC = () => {
   }
   const debouncedSearch = React.useRef(debounce(search, 500)).current;
   useEffect(() => {
-    console.log(searchData);
   }, [searchData]);
   return (
     <AutoCompleteAnt

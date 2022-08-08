@@ -16,10 +16,12 @@ import SignIn from './pages/Home/signin';
 import SignUp from './pages/Home/signup';
 import CategoryProduct from './pages/Home/category';
 import Guard from './components/Guard';
+import { BackTop } from 'antd';
 
 function App() {
   return (
     <div className='App'>
+      <BackTop />
       <ScrollToTop>
         <Routes>
           <Route path='/' element={<UserLayout />}>
