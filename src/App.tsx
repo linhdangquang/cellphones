@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import AdminLayout from './components/Layout/Admin/Admin';
 import ProductAdminPage from './pages/Admin/products';
 import UserLayout from './components/Layout/User/User';
@@ -19,11 +19,12 @@ import Guard from './components/Guard';
 import { BackTop } from 'antd';
 
 function App() {
+  const location = useLocation();
   return (
     <div className='App'>
       <BackTop />
       <ScrollToTop>
-        <Routes>
+        <Routes location={location} key={location.pathname}>
           <Route path='/' element={<UserLayout />}>
             <Route index element={<Home />} />
             <Route path='products'>

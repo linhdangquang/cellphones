@@ -29,7 +29,7 @@ const CategoryProduct = () => {
         )?.displayName,
         link: `/categories/${categories?.data?.find(
           (category) => category.name === categoryName
-        )}`,
+        )?.name}`,
       },
     ];
     setBreadCrumb(breadCrumb);
