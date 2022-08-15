@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import parse from 'html-react-parser';
 import {
   useGetProductQuery,
   useGetProductsByCategoryQuery,
@@ -16,12 +17,14 @@ import {
   ImageContainer,
   PageContainer,
   PayNowButton,
+  ProductDescription,
   ProductInfo,
   ProductInfoContent,
   ProductRelated,
   ProductRelatedContainer,
   ProductShortInfo,
   ProductTitle,
+  ShowMoreButton,
 } from './products.styles';
 import {
   ItemPrice,
@@ -39,6 +42,7 @@ const Product = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { data, isLoading } = useGetProductQuery(id);
+  const [showMore, setShowMore] = useState<any>(false);
   const category = useGetCategoryByNameQuery(data?.categories);
   const [breadCrumb, setBreadCrumb] = useState<any>([]);
   const products = useGetProductsByCategoryQuery(data?.categories);
@@ -124,6 +128,26 @@ const Product = () => {
               ))}
             </ProductRelatedContainer>
           </ProductRelated>
+          <ProductDescription>
+            <h2
+              style={{ fontSize: '28px', fontWeight: 'bold', color: 'crimson' }}
+            >
+              Mô tả sản phẩm
+            </h2>
+            {data && data.description.length >  1500 ? (
+              <>
+                {showMore
+                  ? parse(data?.description as string)
+                  : parse(data?.description.slice(0, 1500) as string) || ''}
+
+                <ShowMoreButton onClick={() => setShowMore(!showMore)}>
+                  {showMore ? 'Thu gọn' : 'Xem thêm'}
+                </ShowMoreButton>
+              </>
+            ) : (
+              parse(data?.description as string) || ''
+            )}
+          </ProductDescription>
         </PageContainer>
       )}
     </>

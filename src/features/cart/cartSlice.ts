@@ -21,13 +21,17 @@ const initialState: Cart = {
   totalItems: 0,
 };
 
+const productInCartFn = (product: IProduct, cart: Cart) => {
+  return cart.products.find(item => item.id === product.id);
+}
+
 export const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
     addToCart: (state, action: PayloadAction<IProduct>) => {
       const product = action.payload;
-      const productInCart = state.products.find((p) => p.id === product.id);
+      const productInCart = productInCartFn(product, state);
       if (productInCart) {
         productInCart.quantity += 1;
         toast.success('Sản phẩm đã được cộng thêm vào giỏ hàng');
@@ -40,7 +44,7 @@ export const cartSlice = createSlice({
     },
     increaseQuantityItem: (state, action: PayloadAction<CartItem>) => {
       const product = action.payload;
-      const productInCart = state.products.find((p) => p.id === product.id);
+      const productInCart = productInCartFn(product, state);
       if (productInCart) {
         productInCart.quantity += 1;
       }
@@ -49,7 +53,7 @@ export const cartSlice = createSlice({
     },
     decreaseQuantityItem: (state, action: PayloadAction<CartItem>) => {
       const product = action.payload;
-      const productInCart = state.products.find((p) => p.id === product.id);
+      const productInCart = productInCartFn(product, state);
       if (productInCart) {
         productInCart.quantity -= 1;
         if (productInCart.quantity === 0) {

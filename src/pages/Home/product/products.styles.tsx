@@ -111,3 +111,27 @@ export const ProductRelatedContainer = styled.div`
   margin-top: 30px;
   justify-content: flex-start;
 `
+
+export const ProductDescription = styled.div`
+  width: calc(1200px - 100px);
+  margin: 35px 0;
+  margin-right: auto;
+  margin-left: calc(150px - 30px);
+  padding: 30px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+`
+
+export const ShowMoreButton = styled(Button)`
+  margin: 0 auto;
+  width: 300px;
+  height: 35px;
+  border-radius: 5px;
+  background-color: #fff !important;
+  border-color: #000 !important;
+  color: #000 !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease-in-out;
+`

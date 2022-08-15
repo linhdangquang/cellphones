@@ -1,8 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Col, Row, Button, Form, Input, InputNumber, Select } from 'antd';
 import { currencyFormatter, currencyParser } from '../../utils/formatVND';
 import { useGetCategoriesQuery } from '../../services/categories-api';
+import ReactQuill from 'react-quill';
+import CustomQuillEditor from '../CustomQuillEditor';
 
 type Props = {
   onFinish: (values: any) => void;
@@ -21,6 +23,7 @@ const ProductForm = ({
 }: Props) => {
   const categories =  useGetCategoriesQuery();
   const [form] = Form.useForm();
+  const [editorValue, setEditorValue] = useState<any>(null);
   useEffect(() => {
     if (formData) {
       form.setFieldsValue(formData);
@@ -113,13 +116,16 @@ const ProductForm = ({
       >
         <FormTextArea name='feature' />
       </Form.Item>
-      <Form.Item
+      {/* <Form.Item
         name='description'
         labelCol={{ span: 24 }}
         label='Mô tả sản phẩm'
         rules={[{ required: true, message: 'Mô tả sản phẩm' }]}
       >
         <FormTextArea name='description' />
+      </Form.Item> */}
+      <Form.Item    name={'description'} label='Mô tả sản phẩm' rules={[{ required: true, message: 'Mô tả sản phẩm' }]}>
+        <CustomQuillEditor   value={editorValue} onChange={setEditorValue} />
       </Form.Item>
 
       <Form.Item>
