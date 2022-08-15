@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 import BreadCrumbPage from '../../../components/BreadCrum';
 import HomeLoading from '../../../components/Loading/HomeLoading';
@@ -27,15 +28,22 @@ const CategoryProduct = () => {
         name: categories?.data?.find(
           (category) => category.name === categoryName
         )?.displayName,
-        link: `/categories/${categories?.data?.find(
-          (category) => category.name === categoryName
-        )?.name}`,
+        link: `/categories/${
+          categories?.data?.find((category) => category.name === categoryName)
+            ?.name
+        }`,
       },
     ];
     setBreadCrumb(breadCrumb);
   }, [data, categoryName, categories]);
   return (
     <>
+      <Helmet>
+        <title>{`${
+          categories?.data?.find((category) => category.name === categoryName)
+            ?.displayName
+        } - Cellphones`}</title>
+      </Helmet>
       <BreadCrumbPage breadcrumbItems={breadCrumb} />
       <ContainerTitle>
         {

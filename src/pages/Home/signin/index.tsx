@@ -18,6 +18,7 @@ import { Form, message } from 'antd';
 import { signIn } from '../../../api/auth';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 type Props = {};
 
@@ -27,7 +28,7 @@ const SignIn = (props: Props) => {
   const onFinish = async (values: any) => {
     try {
       const { data } = await signIn(values);
-      localStorage.setItem('user',JSON.stringify(data));
+      localStorage.setItem('user', JSON.stringify(data));
       toast.success('Đăng nhập thành công');
       if (data.user.admin) {
         navigate('/admin');
@@ -44,6 +45,9 @@ const SignIn = (props: Props) => {
   };
   return (
     <Container>
+      <Helmet>
+        <title>Đăng nhập - Cellphones</title>
+      </Helmet>
       <SignInContent>
         <SignInForm
           name='signin'

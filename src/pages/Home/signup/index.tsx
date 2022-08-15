@@ -18,6 +18,7 @@ import { Form, message } from 'antd';
 import { signUp } from '../../../api/auth';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 type Props = {};
 
 const SignUp = (props: Props) => {
@@ -39,6 +40,9 @@ const SignUp = (props: Props) => {
   };
   return (
     <Container>
+      <Helmet>
+        <title>Đăng ký - Cellphones</title>
+      </Helmet>
       <SignInContent>
         <SignInForm
           name='signin'
@@ -69,7 +73,7 @@ const SignUp = (props: Props) => {
                 { required: true, message: 'Số điện thoại không được trống' },
               ]}
             >
-              <Input  />
+              <Input />
             </Form.Item>
           </InputContainer>
           <InputContainer>

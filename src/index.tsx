@@ -9,18 +9,30 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { persistor, store } from './app/store';
 import { PersistGate } from 'redux-persist/integration/react';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <Provider store={store}>
-    <PersistGate 
-      loading={null}
-      persistor={persistor}
-    >
+    <PersistGate loading={null} persistor={persistor}>
       <BrowserRouter>
-        <App />
+        <HelmetProvider>
+          <Helmet>
+            <meta charSet='utf-8' />
+            <meta
+              name='viewport'
+              content='width=device-width, initial-scale=1'
+            />
+            <link
+              rel='icon'
+              type='image/x-icon'
+              href='https://cdn2.cellphones.com.vn/200x/media/favicon/default/logo-cps.png'
+            />
+          </Helmet>
+          <App />
+        </HelmetProvider>
       </BrowserRouter>
     </PersistGate>
   </Provider>

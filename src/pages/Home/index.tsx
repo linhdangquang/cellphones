@@ -8,14 +8,17 @@ import Banner3 from '../../assets/images/banner3.png';
 import Banner4 from '../../assets/images/banner4.png';
 import Banner5 from '../../assets/images/banner5.png';
 import Banner6 from '../../assets/images/banner6.png';
-import { useAppSelector } from '../../app/hooks';
 import ProductsContainer from '../../components/Product/ProductsContainer';
+import { Helmet } from 'react-helmet-async';
 type Props = {};
 
 const Home = (props: Props) => {
   const slides = [Banner1, Banner2, Banner3, Banner4, Banner5, Banner6];
   return (
     <>
+    <Helmet>
+      <title>Trang chủ - Cellphones</title>
+    </Helmet>
       <HomeTopContent>
         <MainHomeMenu />
         <SliderContainer autoplay effect='fade' dots dotPosition='bottom'>

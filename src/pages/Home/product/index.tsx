@@ -37,6 +37,7 @@ import { ShoppingCartOutlined } from '@ant-design/icons';
 import ProductCard from '../../../components/Product/ProductCard';
 import BreadCrumbPage from '../../../components/BreadCrum';
 import { useGetCategoryByNameQuery } from '../../../services/categories-api';
+import { Helmet } from 'react-helmet-async';
 
 const Product = () => {
   const { id } = useParams();
@@ -80,6 +81,9 @@ const Product = () => {
   }, [data, category]);
   return (
     <>
+    <Helmet>
+      <title>{`${data?.name || ''} - Cellphones`}</title>
+    </Helmet>
       {isLoading ? (
         <LoadingContainer>
           <HomeLoading />

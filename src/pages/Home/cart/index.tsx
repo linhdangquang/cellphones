@@ -1,5 +1,6 @@
 import { Empty } from 'antd';
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../../app/hooks';
 import { formatVND } from '../../../utils/formatVND';
@@ -23,6 +24,9 @@ const CartPage = (props: Props) => {
   const { products, total } = useAppSelector((state) => state.cart);
   return (
     <Container>
+      <Helmet>
+        <title>Giỏ hàng - Cellphones</title>
+      </Helmet>
       {products.length > 0 ? (
         <>
           <CartHeader>
